@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ config.title }}</title>
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Files in {{ path }}</h1>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Last Modified</th>
+        </tr>
+        {% for file in files %}
+        <tr>
+          <td>
+            <span class="icon">{{ file.icon }}</span
+            ><a href="{{ url_for('serve_files', path=path + '/' + file.name) }}"
+              >{{ file.name }}</a
+            >
+          </td>
+          <td>{{ file.size }}</td>
+          <td>{{ file.modified.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: serfile
+    ports:
+      - "5353:8080"
+    volumes:
+      - C:\Users\Lenovo_2200G\Desktop\Apron:/app/static/root
+    restart: unless-stopped
