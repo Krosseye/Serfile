@@ -16,7 +16,7 @@ Serfile is a lightweight web server designed for simple file hosting and browsin
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/serfile.git
+   git clone https://github.com/Krosseye/Serfile.git
    cd serfile
    ```
 
@@ -47,7 +47,7 @@ Serfile is a lightweight web server designed for simple file hosting and browsin
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/serfile.git
+   git clone https://github.com/Krosseye/Serfile.git
    cd serfile
    ```
 
@@ -104,4 +104,4 @@ Serfile is distributed under the MIT License. For more details, see the [LICENSE
 
 ---
 
-Feel free to contribute, report issues, or suggest improvements by creating a pull request or opening an issue on the [GitHub repository](https://github.com/yourusername/serfile). Your feedback is greatly appreciated!
+Feel free to contribute, report issues, or suggest improvements by creating a pull request or opening an issue on the [GitHub repository](https://github.com/Krosseye/Serfile). Your feedback is greatly appreciated!
