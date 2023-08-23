@@ -8,8 +8,14 @@ from waitress import serve
 
 app = Flask(__name__)
 
+# Get the directory path of the current script
+script_directory = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the full path to the config file
+config_file_path = os.path.join(script_directory, "config.json")
+
 # Read configuration from config.json
-with open("./config.json", "r") as config_file:
+with open(config_file_path, "r") as config_file:
     config = json.load(config_file)
 
 # Serve files from the "static" directory
