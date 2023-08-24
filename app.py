@@ -2,6 +2,7 @@ import json
 import os
 from datetime import datetime
 
+from file_icons import ICON_MAP
 from flask import Flask, render_template, send_from_directory
 from waitress import serve
 
@@ -19,27 +20,6 @@ with open(config_file_path, "r") as config_file:
 
 # Serve files from the "static" directory
 static_directory = os.path.join(os.path.dirname(__file__), "static")
-
-ICON_MAP = {
-    ".jpg": "🖼️",
-    ".png": "🖼️",
-    ".jpeg": "🖼️",
-    ".gif": "🖼️",
-    ".bmp": "🖼️",
-    ".mp3": "🎵",
-    ".wav": "🎵",
-    ".ogg": "🎵",
-    ".mp4": "📹",
-    ".avi": "📹",
-    ".mkv": "📹",
-    ".txt": "📝",
-    ".pdf": "📄",
-    ".doc": "📑",
-    ".docx": "📑",
-    ".zip": "🗃️",
-    ".rar": "🗃️",
-    ".7z": "🗃️",
-}
 
 
 def get_file_icon(filename, is_folder=False):
