@@ -90,7 +90,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - path/to/serve:/app/static/root
+      - /path/to/serve:/app/static/root
     restart: unless-stopped
 ```
 
