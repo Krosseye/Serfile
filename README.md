@@ -91,7 +91,6 @@ services:
       - "8080:8080"
     volumes:
       - path/to/serve:/app/static/root
-      - path/to/config:/app
     restart: unless-stopped
 ```
 
