@@ -1,23 +1,24 @@
-# Serfile - Simple File Hosting Web Server
+
+# Serfile :file_folder: - Simple File Hosting Web Server
 
 Serfile is a lightweight web server designed for simple file hosting and browsing. It provides an intuitive web-based user interface for navigating and managing files within a specified directory.
 
 ## Features
 
-- Easy installation and setup.
-- Web-based UI for browsing and managing files.
-- Two deployment options: Python environment or Docker.
-- MIT licensed - use, modify, and distribute with ease.
+- :rocket: Easy installation and setup.
+- :file_folder: Web-based UI for browsing and managing files.
+- :gear: Two deployment options: Python environment or Docker.
+- :scroll: MIT licensed - use, modify, and distribute with ease.
 
 ## Installation and Usage
 
-### Python Environment
+### :computer: Python Environment
 
 1. Clone the repository:
 
    ```bash
    git clone https://github.com/Krosseye/Serfile.git
-   cd serfile
+   cd Serfile
    ```
 
 2. Create a Python virtual environment and activate it:
@@ -42,13 +43,13 @@ Serfile is a lightweight web server designed for simple file hosting and browsin
 
 6. Access the Serfile UI by opening a web browser and navigating to `http://localhost:8080` or your specified port.
 
-### Docker Compose
+### :whale: Docker Compose
 
 1. Clone the repository:
 
    ```bash
    git clone https://github.com/Krosseye/Serfile.git
-   cd serfile
+   cd Serfile
    ```
 
 2. Configure the server by editing the `docker-compose.yml` file as needed.
@@ -62,7 +63,7 @@ Serfile is a lightweight web server designed for simple file hosting and browsin
 
 ## Configuration
 
-### Python Environment (`config.json`)
+### :wrench: Python Environment (`config.json`)
 
 Modify the `config.json` file to customize settings.
 
@@ -75,7 +76,7 @@ Modify the `config.json` file to customize settings.
 }
 ```
 
-### Docker Compose (`docker-compose.yml`)
+### :whale2: Docker Compose (`docker-compose.yml`)
 
 Edit the `docker-compose.yml` file to adjust settings.
 
@@ -98,8 +99,8 @@ Make sure to modify `/path/to/serve`.
 
 ## License
 
-Serfile is distributed under the MIT License. For more details, see the [LICENSE](LICENSE) file.
+:page_with_curl: Serfile is distributed under the MIT License. For more details, see the [LICENSE](LICENSE) file.
 
 ---
 
-Feel free to contribute, report issues, or suggest improvements by creating a pull request or opening an issue on the [GitHub repository](https://github.com/Krosseye/Serfile). Your feedback is greatly appreciated!
+:speech_balloon: Feel free to contribute, report issues, or suggest improvements by creating a pull request or opening an issue on the [GitHub repository](https://github.com/Krosseye/Serfile). Your feedback is greatly appreciated!
