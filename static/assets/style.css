@@ -19,8 +19,7 @@ body {
   background-color: var(--background-color);
 }
 .container {
-  width: 80%;
-  max-width: 800px;
+  width: 65%;
   margin: 50px auto;
   padding: 20px;
   background-color: white;
@@ -38,6 +37,11 @@ td {
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
+
+td:first-child {
+  width: 70%;
+}
+
 th {
   background-color: #f0f0f0;
   text-align: left;
