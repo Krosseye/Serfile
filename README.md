@@ -60,8 +60,6 @@ Serfile is a lightweight web server designed for simple file hosting and browsin
 
 4. Access the Serfile UI by opening a web browser and navigating to `http://localhost:8080` or your specified port.
 
-**Note:** When using Docker Compose, avoid modifying the `config.json` file directly. Instead, configure the application using the `docker-compose.yml` file.
-
 ## Configuration
 
 ### Python Environment (`config.json`)
@@ -93,10 +91,11 @@ services:
       - "8080:8080"
     volumes:
       - path/to/serve:/app/static/root
+      - path/to/config:/app
     restart: unless-stopped
 ```
 
-Make sure to modify `path/to/serve`.
+Make sure to modify `path/to/serve` and `path/to/config`.
 
 ## License
 
