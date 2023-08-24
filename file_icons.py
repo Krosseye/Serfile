@@ -37,21 +37,33 @@ ICON_MAP = {
     ".7z": "🗃️",       # 7-Zip archive
     ".tar": "🗃️",      # Tarball archive
     ".gz": "🗃️",       # Gzip archive
-    ".exe": "💾",       # Executable file
-    ".msi": "💾",       # Windows Installer package
-    ".bat": "💾",       # Batch script
-    ".cmd": "💾",       # Command script
-    ".sh": "💾",        # Shell script
-    ".bin": "💾",       # Binary executable
-    ".out": "💾",       # Compiled output
-    ".run": "💾",       # Runnable file
+    ".exe": "💿",       # Executable file
+    ".msi": "💿",       # Windows Installer package
+    ".bat": "💿",       # Batch script
+    ".cmd": "💿",       # Command script
+    ".sh": "💿",        # Shell script
+    ".bin": "💿",       # Binary executable
+    ".out": "💿",       # Compiled output
+    ".run": "💿",       # Runnable file
     ".app": "📱",       # Application file
     ".dmg": "💾",       # macOS disk image
     ".apk": "📱",       # Android package
     ".ipa": "📱",       # iOS app
-    ".jar": "💾",       # Java Archive
+    ".jar": "💿",       # Java Archive
     ".deb": "💾",       # Debian package
     ".rpm": "💾",       # RPM package
-    ".command": "💾",   # Command script
+    ".command": "💿",   # Command script
     ".dll": "💾",       # DLL file
+    ".iso": "💿",       # DLL file
+    ".img": "💿",      # Generic disk image
+    ".vhd": "🗃️",      # Virtual Hard Disk (VHD)
+    ".vhdx": "🗃️",     # Virtual Hard Disk (VHDX)
+    ".vmdk": "🗃️",     # Virtual Machine Disk (VMDK)
+    ".raw": "🗃️",      # Raw disk image
+    ".qcow": "🗃️",     # QEMU Copy On Write (QCOW)
+    ".qcow2": "🗃️",    # QEMU Copy On Write (QCOW2)
+    ".udf": "📀",       # Universal Disk Format (UDF)
+    ".cue": "📀",       # CUE file
+    ".nrg": "📀",       # Nero Disk Image (NRG)
+    ".ape": "📀",       # Monkey's Audio Format (APE)
 }
