@@ -1,5 +1,4 @@
 import json
-import mimetypes
 import os
 from datetime import datetime
 
@@ -22,23 +21,37 @@ with open(config_file_path, "r") as config_file:
 static_directory = os.path.join(os.path.dirname(__file__), "static")
 
 ICON_MAP = {
-    "image": "🖼️",
-    "audio": "🎵",
-    "video": "📹",
-    "text": "📝",
-    "application/pdf": "📄",
-    "application/msword": "📑",
+    ".jpg": "🖼️",
+    ".png": "🖼️",
+    ".jpeg": "🖼️",
+    ".gif": "🖼️",
+    ".bmp": "🖼️",
+    ".mp3": "🎵",
+    ".wav": "🎵",
+    ".ogg": "🎵",
+    ".mp4": "📹",
+    ".avi": "📹",
+    ".mkv": "📹",
+    ".txt": "📝",
+    ".pdf": "📄",
+    ".doc": "📑",
+    ".docx": "📑",
+    ".zip": "🗃️",
+    ".rar": "🗃️",
+    ".7z": "🗃️",
 }
 
 
 def get_file_icon(filename, is_folder=False):
     if is_folder:
         return "📁"
-    mime_type, _ = mimetypes.guess_type(filename)
-    if mime_type is None:
-        return "📄"
-    mime_group = mime_type.split('/')[0]
-    return ICON_MAP.get(mime_group, "📄")
+
+    extension = os.path.splitext(filename)[1].lower()
+
+    if extension in ICON_MAP:
+        return ICON_MAP[extension]
+
+    return "📄"
 
 
 @app.route("/", defaults={"path": ""})
