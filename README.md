@@ -94,7 +94,7 @@ services:
     restart: unless-stopped
 ```
 
-Make sure to modify `path/to/serve` and `path/to/config`.
+Make sure to modify `/path/to/serve`.
 
 ## License
 
