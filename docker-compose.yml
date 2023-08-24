@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: serfile
     ports:
-      - "5353:8080"
+      - "8080:8080"
     volumes:
-      - C:\Users\Lenovo_2200G\Desktop\Apron:/app/static/root
+      - /path/to/serve:/app/static/root
     restart: unless-stopped
