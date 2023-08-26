@@ -40,6 +40,7 @@ td {
 
 td:first-child {
   width: 70%;
+  word-break: break-all;
 }
 
 th {
