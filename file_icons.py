@@ -126,6 +126,8 @@ ICON_MAP = {
     # Font Formats
     ".ttf": "🔡",       # TrueType font
     ".otf": "🔡",       # OpenType font
+    ".woff": "🔡",       # WebOpenFontFormat font
+    ".woff2": "🔡",       # WebOpenFontFormat font
 
     # Miscellaneous Formats
     ".torrent": "🔗",   # Torrent file
