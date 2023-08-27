@@ -77,7 +77,7 @@ Modify the `config.json` file to customize settings.
 }
 ```
 
-Options for `theme` are: default (light), dark.
+Options for `theme` are: `default` (light) & `dark`.
 
 ### :whale2: Docker Compose (`docker-compose.yml`)
 
