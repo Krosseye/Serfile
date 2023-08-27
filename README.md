@@ -72,7 +72,7 @@ Modify the `config.json` file to customize settings.
   "port": 8080,
   "host": "0.0.0.0",
   "title": "Serfile",
-  "root_directory": "root"
+  "root_directory": "root",
   "theme": "default"
 }
 ```
