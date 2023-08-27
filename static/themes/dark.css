@@ -1,0 +1,9 @@
+:root {
+  --font-family: "Inter", Arial, sans-serif;
+  --background-color: #262626;
+  --secondary-color: #373737;
+  --tertiary-color: #4c4c4c;
+  --text-color: #ffffff;
+  --box-shadow: 0 0 0;
+  --border-radius: 10px;
+}

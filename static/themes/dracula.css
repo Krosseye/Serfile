@@ -1,0 +1,26 @@
+:root {
+  --font-family: "Inter", Arial, sans-serif;
+  --background-color: #282a36;
+  --secondary-color: #373844;
+  --tertiary-color: #44475a;
+  --text-color: #f8f8f2;
+  --box-shadow: 0 0 0;
+  --border-radius: 10px;
+
+  /* Additional Dracula Colors */
+  --cyan-color: #8be9fd;
+  --green-color: #50fa7b;
+  --orange-color: #ffb86c;
+  --pink-color: #ff79c6;
+  --purple-color: #bd93f9;
+  --red-color: #ff5555;
+  --yellow-color: #f1fa8c;
+}
+
+tr:hover a {
+  color: var(--purple-color);
+}
+
+a {
+  color: var(--cyan-color);
+}

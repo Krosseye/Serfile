@@ -1,0 +1,84 @@
+:root {
+  --font-family: "Inter", Arial, sans-serif;
+  --background-color: #f0f0f0;
+  --secondary-color: #ffff;
+  --tertiary-color: #f9f9f9;
+  --text-color: #0f0f0f;
+  --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  --border-radius: 10px;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
+
+@font-face {
+  font-family: "NotoEmoji";
+  src: url("../assets/NotoColorEmoji.ttf") format("truetype");
+  src: url("../assets/NotoColorEmoji.woff2") format("woff2");
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--background-color);
+}
+.container {
+  width: 65%;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: var(--secondary-color);
+  box-shadow: var(--box-shadow);
+  flex: 1;
+  border-radius: var(--border-radius);
+}
+
+h1 {
+  color: var(--text-color);
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th,
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+td:first-child {
+  width: 75%;
+  word-break: break-all;
+}
+
+tr:nth-child(odd) {
+  background-color: var(--tertiary-color);
+}
+
+th {
+  background-color: var(--background-color);
+  text-align: left;
+}
+tr:hover {
+  background-color: var(--background-color);
+}
+.icon {
+  font-size: 20px;
+  margin-right: 5px;
+  font-family: "NotoEmoji", sans-serif;
+}
+
+.version {
+  position: relative;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
