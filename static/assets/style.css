@@ -43,6 +43,10 @@ td:first-child {
   word-break: break-all;
 }
 
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
 th {
   background-color: #f0f0f0;
   text-align: left;
