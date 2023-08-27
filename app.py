@@ -61,6 +61,8 @@ def serve_files(path):
             is_folder = os.path.isdir(file_path)
             size = os.path.getsize(file_path)
             size_str = format_size(size)
+            if is_folder:
+                size_str = "—"
             modified_time = os.path.getmtime(file_path)
             modified_datetime = datetime.fromtimestamp(modified_time)
             icon = get_file_icon(file, is_folder)
