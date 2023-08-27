@@ -2,7 +2,11 @@
 <html>
   <head>
     <title>{{ config.title }}</title>
-    <link rel="stylesheet" href="/assets/style.css" />
+    <link rel="icon" type="image/png" href="/assets/favicon.svg" />
+    <link rel="preload" as="style" href="/themes/default.css" />
+    <link rel="preload" as="style" href="/themes/{{ config.theme }}.css" />
+    <link rel="stylesheet" href="/themes/default.css" />
+    <link rel="stylesheet" href="/themes/{{ config.theme }}.css" />
   </head>
   <body>
     <div class="container">
@@ -27,5 +31,8 @@
         {% endfor %}
       </table>
     </div>
+    <footer class="version">
+      <span class="icon">🌊</span> Serfile Version: {{ version }}
+    </footer>
   </body>
 </html>

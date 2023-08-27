@@ -4,6 +4,7 @@ from datetime import datetime
 
 from file_icons import ICON_MAP
 from flask import Flask, render_template, send_from_directory
+from version import version
 from waitress import serve
 
 app = Flask(__name__)
@@ -18,20 +19,30 @@ config_file_path = os.path.join(script_directory, "config.json")
 with open(config_file_path, "r") as config_file:
     config = json.load(config_file)
 
+# Define the app version
+APP_VERSION = version
+
 # Serve files from the "static" directory
 static_directory = os.path.join(os.path.dirname(__file__), "static")
 
 
+# Function to get the appropriate icon for a file or folder
 def get_file_icon(filename, is_folder=False):
     if is_folder:
         return "📁"
 
     extension = os.path.splitext(filename)[1].lower()
+    return ICON_MAP.get(extension, "📄")
 
-    if extension in ICON_MAP:
-        return ICON_MAP[extension]
 
-    return "📄"
+# Function to format file size in a human-readable way
+def format_size(size):
+    units = ["Bytes", "KB", "MB", "GB", "TB"]
+    unit_index = 0
+    while size >= 1024 and unit_index < len(units) - 1:
+        size /= 1024
+        unit_index += 1
+    return f"{size:.2f} {units[unit_index]}"
 
 
 @app.route("/", defaults={"path": ""})
@@ -49,12 +60,7 @@ def serve_files(path):
             file_path = os.path.join(full_path, file)
             is_folder = os.path.isdir(file_path)
             size = os.path.getsize(file_path)
-            if size >= 1024 ** 3:
-                size_str = f"{size / (1024 ** 3):.2f} GB"
-            else:
-                size_str = f"{size / (1024 ** 2):.2f} MB"
-            if is_folder:
-                size_str = "—"
+            size_str = format_size(size)
             modified_time = os.path.getmtime(file_path)
             modified_datetime = datetime.fromtimestamp(modified_time)
             icon = get_file_icon(file, is_folder)
@@ -66,12 +72,17 @@ def serve_files(path):
                 "icon": icon
             })
 
-        return render_template("index.html", files=file_data, path=path, config=config)
+        return render_template("index.html", files=file_data, path=path, config=config, version=version)
     elif os.path.isfile(full_path):
         directory, filename = os.path.split(full_path)
         return send_from_directory(directory, filename)
     else:
         return "Not Found", 404
+
+
+@app.route('/version', methods=['GET'])
+def get_version():
+    return {'version': APP_VERSION}
 
 
 if __name__ == "__main__":
