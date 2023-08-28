@@ -97,7 +97,7 @@ ICON_MAP = {
     ".go": "🐹",        # Go Source Code
     ".rs": "🦀",        # Rust Source Code
     ".cs": "#️⃣",        # C# Source Code
-    ".c": "🅒",          # C# Source Code
+    ".c": "🅒",          # C Source Code
 
     # Disk Image Formats
     ".dmg": "💾",       # macOS disk image
