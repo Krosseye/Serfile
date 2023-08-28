@@ -28,6 +28,7 @@ body {
   min-height: 100vh;
   background-color: var(--background-color);
 }
+
 .container {
   width: 65%;
   margin: 50px auto;
@@ -41,10 +42,12 @@ body {
 h1 {
   color: var(--text-color);
 }
+
 table {
   border-collapse: collapse;
   width: 100%;
 }
+
 th,
 td {
   padding: 10px;
@@ -67,6 +70,17 @@ th {
 tr:hover {
   background-color: var(--background-color);
 }
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #4fbcff;
+  text-decoration: underline;
+}
+
 .icon {
   font-size: 20px;
   margin-right: 5px;

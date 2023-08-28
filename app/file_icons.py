@@ -120,6 +120,7 @@ ICON_MAP = {
     ".3ds": "🏗️",      # 3DS Max 3D model
     ".fbx": "🏗️",      # Autodesk FBX 3D model
     ".blend": "🏗️",    # Blender 3D model
+    ".blend1": "🏗️",    # Blender 3D model
     ".c4d": "🏗️",       # Cinema 4D File Format
     ".max": "🏗️",       # 3ds Max Scene File Format
 

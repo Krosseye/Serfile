@@ -17,8 +17,20 @@
   --yellow-color: #f1fa8c;
 }
 
-tr:hover a {
+th:nth-child(3) {
+  color: var(--pink-color);
+}
+
+th:nth-child(2) {
   color: var(--purple-color);
+}
+
+th:nth-child(1) {
+  color: var(--red-color);
+}
+
+a:hover {
+  color: var(--green-color);
 }
 
 a {
