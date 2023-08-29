@@ -4,8 +4,8 @@ from datetime import datetime
 
 from flask import Flask, redirect, render_template, send_from_directory
 
+from .about import app_version, licenses
 from .file_icons import ICON_MAP
-from .version import version
 
 app = Flask(__name__)
 
@@ -23,7 +23,7 @@ with open(config_file_path, "r") as config_file:
     config = json.load(config_file)
 
 # Define the app version
-APP_VERSION = version
+APP_VERSION = app_version
 
 # Serve files from the "static" directory
 static_directory = os.path.join(os.path.dirname(__file__), "static")
@@ -77,7 +77,7 @@ def serve_files(path):
                 "icon": icon
             })
 
-        return render_template("index.html", files=file_data, path=path, config=config, version=version)
+        return render_template("index.html", files=file_data, path=path, config=config, version=APP_VERSION)
     elif os.path.isfile(full_path):
         directory, filename = os.path.split(full_path)
         return send_from_directory(directory, filename)
@@ -94,3 +94,8 @@ def redirect_to_main_page():
 @app.route('/version', methods=['GET'])
 def get_version():
     return {'version': APP_VERSION}
+
+
+@app.route('/about', methods=['GET'])
+def get_info():
+    return ([{'app_version': APP_VERSION}] + licenses)
