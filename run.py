@@ -1,6 +1,6 @@
-from app.app import app, config
+from app.app import CONFIG, app
 from waitress import serve
 
 if __name__ == "__main__":
-    print(f"Serving on http://{config['host']}:{config['port']}")
-    serve(app, host=config["host"], port=config["port"])
+    print(f"Serving on http://{CONFIG['host']}:{CONFIG['port']}")
+    serve(app, host=CONFIG["host"], port=CONFIG["port"])
