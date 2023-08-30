@@ -1,10 +1,10 @@
 import os
 from datetime import datetime
 
-from flask import Flask, redirect, render_template, send_from_directory
+from flask import Flask, redirect
 
 from .about import app_version, licenses
-from .helpers import format_size, get_file_icon, read_config
+from .helpers import format_size, get_file_icon, read_config, render_html
 
 app = Flask(__name__)
 
@@ -27,39 +27,11 @@ if not os.path.exists(root_directory_path):
 
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
-def serve_files(path):
-    if not path:
-        path = CONFIG["root_directory"]
-
-    full_path = os.path.join(static_directory, path)
-
-    if os.path.isdir(full_path):
-        files = os.listdir(full_path)
-        file_data = []
-        for file in files:
-            file_path = os.path.join(full_path, file)
-            is_folder = os.path.isdir(file_path)
-            size = os.path.getsize(file_path)
-            size_str = format_size(size)
-            if is_folder:
-                size_str = "—"
-            modified_time = os.path.getmtime(file_path)
-            modified_datetime = datetime.fromtimestamp(modified_time)
-            icon = get_file_icon(file, is_folder)
-            file_data.append({
-                "name": file,
-                "link": os.path.join(path, file),
-                "size": size_str,
-                "modified": modified_datetime,
-                "icon": icon
-            })
-
-        return render_template("index.html", files=file_data, path=path, config=CONFIG, version=APP_VERSION)
-    elif os.path.isfile(full_path):
-        directory, filename = os.path.split(full_path)
-        return send_from_directory(directory, filename)
-    else:
-        return "Not Found", 404
+def files_route(path):
+    config = CONFIG
+    version = APP_VERSION
+    directory = static_directory
+    return render_html(path, config, directory, version)
 
 
 @app.route("/root/")

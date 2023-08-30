@@ -1,5 +1,8 @@
 import json
 import os
+from datetime import datetime
+
+from flask import render_template, send_from_directory
 
 from .file_icons import ICON_MAP
 
@@ -37,3 +40,42 @@ def read_config():
     with open(config_file_path, "r") as config_file:
         config = json.load(config_file)
         return config
+
+
+def render_html(path, config, directory, version):
+    if not path:
+        path = config["root_directory"]
+
+    full_path = os.path.join(directory, path)
+
+    if os.path.isdir(full_path):
+        files = os.listdir(full_path)
+        file_data = []
+        for file in files:
+            file_path = os.path.join(full_path, file)
+            is_folder = os.path.isdir(file_path)
+            size = os.path.getsize(file_path)
+            size_str = format_size(size)
+            if is_folder:
+                size_str = "—"
+            modified_time = os.path.getmtime(file_path)
+            modified_datetime = datetime.fromtimestamp(modified_time)
+            icon = get_file_icon(file, is_folder)
+            file_data.append({
+                "name": file,
+                "link": os.path.join(path, file),
+                "size": size_str,
+                "modified": modified_datetime,
+                "icon": icon
+            })
+
+        return render_template("index.html",
+                               files=file_data,
+                               path=path,
+                               config=config,
+                               version=version)
+    elif os.path.isfile(full_path):
+        directory, filename = os.path.split(full_path)
+        return send_from_directory(directory, filename)
+    else:
+        return "Not Found", 404
