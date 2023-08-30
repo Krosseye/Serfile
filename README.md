@@ -1,6 +1,6 @@
 # :ocean: Serfile - Simple File Hosting Web Server
 
-Serfile is a lightweight web server designed for simple file hosting and browsing. It provides an intuitive web-based user interface for navigating and managing files within a specified directory.
+Serfile is a lightweight web server designed for simple file hosting and browsing. It provides a minimalist web-based user interface and API for navigating folders and accessing files.
 
 ## Features
 
@@ -62,7 +62,7 @@ Serfile is a lightweight web server designed for simple file hosting and browsin
 
 ## Configuration
 
-### :wrench: Python Environment (`config.json`)
+### :wrench: Server (`config.json`)
 
 Modify the `config.json` file to customize settings.
 
