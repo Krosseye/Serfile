@@ -62,7 +62,7 @@ Serfile is a lightweight web server designed for simple file hosting and browsin
 
 ## Configuration
 
-### :wrench: Python Environment (`config.json`)
+### :wrench: Server (`config.json`)
 
 Modify the `config.json` file to customize settings.
 
