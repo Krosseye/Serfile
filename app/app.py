@@ -48,6 +48,11 @@ def get_version():
     return {'version': APP_VERSION}
 
 
+@app.route('/api', methods=['GET'])
+def get_greeting():
+    return {'hello_world': "Serfile is running"}
+
+
 @app.route('/api/licenses', methods=['GET'])
 def get_info():
     return licenses
@@ -84,8 +89,8 @@ def list_files_json(path):
         return "Not Found", 404
 
 
-@app.route('/api/upload/<path:directory>/', methods=['POST'])
-@app.route('/api/upload/<path:directory>/<path:subdirectory>/', methods=['POST'])
+@app.route('/api/upload/<path:directory>', methods=['POST'])
+@app.route('/api/upload/<path:directory>/<path:subdirectory>', methods=['POST'])
 def upload_file(directory='', subdirectory=''):
     try:
         if 'file' not in request.files:
@@ -111,7 +116,7 @@ def upload_file(directory='', subdirectory=''):
         overwrite = request.args.get('overwrite', '').lower() == 'true'
 
         if os.path.exists(file_path) and not overwrite:
-            return jsonify({'error': 'File already exists. To overwrite, include "overwrite=true" in the request parameters.'}), 409
+            return jsonify({'error': 'File already exists. To overwrite, include ?overwrite=true in the request.'}), 409
 
         uploaded_file.save(file_path)
 
