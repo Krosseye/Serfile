@@ -1,5 +1,5 @@
 :root {
-  --font-family: "Inter", Arial, sans-serif;
+  --font-family: "Inter var", Arial, sans-serif;
   --background-color: #f0f0f0;
   --secondary-color: #ffff;
   --tertiary-color: #f9f9f9;
@@ -13,6 +13,24 @@
   src: url("../assets/fonts/NotoColorEmoji/NotoColorEmoji.ttf")
     format("truetype");
   src: url("../assets/fonts/NotoColorEmoji/NotoColorEmoji.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "Inter var";
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  font-named-instance: "Regular";
+  src: url("../assets/fonts/Inter/Inter-roman.var.woff2?v=3.19") format("woff2");
+}
+@font-face {
+  font-family: "Inter var";
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: italic;
+  font-named-instance: "Italic";
+  src: url("../assets/fonts/Inter/Inter-italic.var.woff2?v=3.19")
     format("woff2");
 }
 
