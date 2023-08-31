@@ -10,7 +10,18 @@
   </head>
   <body>
     <div class="container">
-      <h1>Files in {{ path }}</h1>
+      <h1>
+        Files in {% set path_parts = path.split('/') %} {% for i in
+        range(path_parts|length) %} {% set folder_path =
+        '/'.join(path_parts[:i+1]) %} {% if i == path_parts|length - 1 %} {{
+        path_parts[i] }} {% else %}
+        <a
+          class="directory"
+          href="{{ url_for('files_route', path=folder_path) }}"
+          >{{ path_parts[i] }}</a
+        >
+        / {% endif %} {% endfor %}
+      </h1>
       <table class="sortable">
         <thead>
           <tr>
