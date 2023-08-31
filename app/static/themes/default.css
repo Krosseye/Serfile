@@ -8,12 +8,12 @@
   --border-radius: 10px;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
-
 @font-face {
   font-family: "NotoEmoji";
-  src: url("../assets/NotoColorEmoji.ttf") format("truetype");
-  src: url("../assets/NotoColorEmoji.woff2") format("woff2");
+  src: url("../assets/fonts/NotoColorEmoji/NotoColorEmoji.ttf")
+    format("truetype");
+  src: url("../assets/fonts/NotoColorEmoji/NotoColorEmoji.woff2")
+    format("woff2");
 }
 
 body {
@@ -101,6 +101,14 @@ a:hover {
   background: var(--background-color);
   color: var(--text-color);
   font-weight: bold;
+}
+
+.sortable th:last-child {
+  border-top-right-radius: 0;
+}
+
+.sortable th:first-child {
+  border-top-left-radius: 0;
 }
 
 .sortable tbody tr:nth-child(odd) {
