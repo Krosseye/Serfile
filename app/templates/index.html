@@ -40,7 +40,7 @@
                 >{{ file.name }}</a
               >
             </td>
-            <td data-sort="{{ file.size_value }}">{{ file.size }}</td>
+            <td data-sort="{{ file.size }}">{{ file.size_str }}</td>
             <td>{{ file.modified.strftime('%Y-%m-%d %H:%M:%S') }}</td>
           </tr>
           {% endfor %}
