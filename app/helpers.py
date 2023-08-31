@@ -64,6 +64,7 @@ def render_html(path, config, directory, version):
             file_data.append({
                 "name": file,
                 "link": os.path.join(path, file),
+                "size_value": size,
                 "size": size_str,
                 "modified": modified_datetime,
                 "icon": icon

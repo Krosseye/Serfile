@@ -96,3 +96,20 @@ a:hover {
   width: 100%;
   box-sizing: border-box;
 }
+
+.sortable thead th {
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+.sortable tbody tr:nth-child(odd) {
+  background-color: var(--secondary-color);
+}
+
+.sortable tbody tr:nth-child(even) {
+  background-color: var(--tertiary-color);
+}
+
+.sortable tbody tr:hover {
+  background-color: var(--background-color);
+}
