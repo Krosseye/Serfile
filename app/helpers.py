@@ -25,7 +25,7 @@ def format_size(size):
         unit_index += 1
     return f"{size:.2f} {units[unit_index]}"
 
-
+# Read the configuration file
 def read_config():
     # Get directory of current script
     script_directory = os.path.dirname(os.path.abspath(__file__))
