@@ -1,17 +1,17 @@
-# Use an official Python runtime as a parent image
-FROM python:3.8-slim
+# Use official Python runtime as parent image
+FROM python:3.11.5-slim
 
-# Set the working directory to /app
+# Set working directory to /app
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
+# Copy current directory contents into container at /app
 COPY . /app
 
-# Install any needed packages specified in requirements.txt
+# Install packages from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 8080 available to the world outside this container
+# Make port 8080 available outside container
 EXPOSE 8080
 
-# Run app.py when the container launches
+# Run app.py when container launches
 CMD ["python", "run.py"]
