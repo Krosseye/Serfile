@@ -1,8 +1,7 @@
 :root {
   --font-family: "Inter", Arial, sans-serif;
   --primary-color: #373737;
-  --secondary-color: #262626;
-  --tertiary-color: #4c4c4c;
+  --shade: white;
   --text-color: #ffffff;
 }
 

@@ -1,11 +1,8 @@
 :root {
   --font-family: "Inter", Arial, sans-serif;
-  --secondary-color: #282a36;
   --primary-color: #373844;
-  --tertiary-color: #44475a;
+  --shade: white;
   --text-color: #f8f8f2;
-  --box-shadow: 0 0 0;
-  --border-radius: 10px;
 
   /* Additional Dracula Colors */
   --cyan-color: #8be9fd;
