@@ -71,12 +71,9 @@ Modify the `config.json` file to customize settings.
   "port": 8080,
   "host": "0.0.0.0",
   "title": "Serfile",
-  "root_directory": "root",
-  "theme": "default"
+  "root_directory": "root"
 }
 ```
-
-Options for `theme` are: `default` (light) & `dark`.
 
 ### :whale2: Docker Compose (`docker-compose.yml`)
 
