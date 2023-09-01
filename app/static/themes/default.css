@@ -1,11 +1,11 @@
 :root {
   --font-family: "Inter var", Arial, sans-serif;
-  --background-color: #f0f0f0;
-  --secondary-color: #ffff;
-  --tertiary-color: #f9f9f9;
+  --primary-color: #ffff;
+  --secondary-color: color-mix(in srgb, var(--primary-color), black 10%);
+  --tertiary-color: color-mix(in srgb, var(--primary-color), black 5%);
   --text-color: #0f0f0f;
-  --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   --border-radius: 10px;
+  --border: 1px solid color-mix(in srgb, var(--primary-color), black 15%);
 }
 
 @font-face {
@@ -44,18 +44,18 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: var(--background-color);
+  background-color: var(--secondary-color);
 }
 
 .container {
   width: 65%;
   margin: 50px auto;
   padding: 20px;
-  background-color: var(--secondary-color);
-  box-shadow: var(--box-shadow);
+  background-color: var(--primary-color);
   flex: 1;
   border-radius: var(--border-radius);
   transition: width 0.4s;
+  border: var(--border);
 }
 
 h1 {
@@ -70,12 +70,29 @@ table {
 th,
 td {
   padding: 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: var(--border);
+}
+
+th {
+  border-top: var(--border);
+}
+
+th:first-child {
+  border-left: var(--border);
+}
+
+th:last-child {
+  border-right: var(--border);
 }
 
 td:first-child {
   width: 75%;
   word-break: break-all;
+  border-left: var(--border);
+}
+
+td:last-child {
+  border-right: var(--border);
 }
 
 tr:nth-child(odd) {
@@ -83,11 +100,12 @@ tr:nth-child(odd) {
 }
 
 th {
-  background-color: var(--background-color);
+  background-color: var(--secondary-color);
   text-align: left;
 }
+
 tr:hover {
-  background-color: var(--background-color);
+  background-color: var(--secondary-color);
 }
 
 a {
@@ -121,7 +139,7 @@ a:hover {
 }
 
 .sortable thead th {
-  background: var(--background-color);
+  background: var(--secondary-color);
   color: var(--text-color);
   font-weight: bold;
 }
@@ -135,7 +153,7 @@ a:hover {
 }
 
 .sortable tbody tr:nth-child(odd) {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 
 .sortable tbody tr:nth-child(even) {
@@ -143,7 +161,7 @@ a:hover {
 }
 
 .sortable tbody tr:hover {
-  background-color: var(--background-color);
+  background-color: var(--secondary-color);
 }
 
 @media screen and (max-width: 1080px) {
