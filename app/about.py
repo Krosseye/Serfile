@@ -1,4 +1,4 @@
-app_version = "0.3.10 (Alpha Pre-release)"
+app_version = "0.4.0 (Alpha Pre-release)"
 
 licenses = {
     "assets": [
@@ -7,7 +7,6 @@ licenses = {
             "version": "Unicode 15.0",
             "license": "SIL Open Font License, version 1.1"
         },
-
         {
             "name": "Inter Font",
             "version": "v3.19",

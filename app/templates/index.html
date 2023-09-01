@@ -5,13 +5,18 @@
     <link rel="icon" type="image/png" href="/assets/favicon.svg" />
     <link rel="stylesheet" href="/assets/sortable.min.css" />
     <script src="/assets/sortable.min.js"></script>
-    <link rel="stylesheet" href="/themes/default.css" />
-    <link rel="stylesheet" href="/themes/{{ config.theme }}.css" />
+    <link
+      rel="stylesheet"
+      href="/themes/default.css"
+      id="light-mode-stylesheet"
+    />
+    <link rel="stylesheet" href="/themes/dark.css" id="dark-mode-stylesheet" />
   </head>
   <body>
     <div class="container">
-      <h1>
-        Files in {% set path_parts = path.split('/') %} {% for i in
+      <h1><span class="header-icon">🌊</span>{{ config.title }}</h1>
+      <h2>
+        / {% set path_parts = path.split('/') %} {% for i in
         range(path_parts|length) %} {% set folder_path =
         '/'.join(path_parts[:i+1]) %} {% if i == path_parts|length - 1 %} {{
         path_parts[i] }} {% else %}
@@ -21,7 +26,7 @@
           >{{ path_parts[i] }}</a
         >
         / {% endif %} {% endfor %}
-      </h1>
+      </h2>
       <table class="sortable">
         <thead>
           <tr>
@@ -48,7 +53,33 @@
       </table>
     </div>
     <footer class="version">
-      <span class="icon">🌊</span> Serfile Version: {{ version }}
+      <span class="icon">🚀</span>Version: {{ version }}
     </footer>
   </body>
+  <script>
+    function darkModeEnabled() {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+
+    function toggleStylesheets() {
+      const lightModeStylesheet = document.getElementById(
+        "light-mode-stylesheet"
+      );
+      const darkModeStylesheet = document.getElementById(
+        "dark-mode-stylesheet"
+      );
+
+      if (darkModeEnabled()) {
+        darkModeStylesheet.disabled = false;
+      } else {
+        darkModeStylesheet.disabled = true;
+      }
+    }
+
+    window.addEventListener("load", toggleStylesheets);
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addListener(toggleStylesheets);
+  </script>
 </html>

@@ -125,6 +125,12 @@ a:hover {
   font-family: "NotoEmoji", sans-serif;
 }
 
+.header-icon {
+  font-size: inherit;
+  margin-right: 5px;
+  font-family: "NotoEmoji", sans-serif;
+}
+
 .version {
   position: relative;
   padding: 20px;
