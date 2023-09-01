@@ -55,6 +55,7 @@ body {
   box-shadow: var(--box-shadow);
   flex: 1;
   border-radius: var(--border-radius);
+  transition: width 0.4s;
 }
 
 h1 {
@@ -115,6 +116,10 @@ a:hover {
   box-sizing: border-box;
 }
 
+.sortable td {
+  color: var(--text-color);
+}
+
 .sortable thead th {
   background: var(--background-color);
   color: var(--text-color);
@@ -139,4 +144,10 @@ a:hover {
 
 .sortable tbody tr:hover {
   background-color: var(--background-color);
+}
+
+@media screen and (max-width: 1080px) {
+  .container {
+    width: 85%;
+  }
 }

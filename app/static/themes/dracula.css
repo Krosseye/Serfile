@@ -36,3 +36,15 @@ a:hover {
 a {
   color: var(--cyan-color);
 }
+
+.sortable th:nth-child(3) {
+  color: var(--pink-color);
+}
+
+.sortable th:nth-child(2) {
+  color: var(--purple-color);
+}
+
+.sortable th:nth-child(1) {
+  color: var(--red-color);
+}
