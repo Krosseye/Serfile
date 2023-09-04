@@ -96,6 +96,10 @@ services:
 
 Make sure to modify `/path/to/serve`.
 
+## Preview
+
+![Preview screenshot of the Serfile Web-UI](https://i.ibb.co/yWhR0mG/Serfile-Screenshot-01.png)
+
 ## License
 
 :page_with_curl: Serfile is distributed under the MIT License. For more details, see the [LICENSE](LICENSE) file.
