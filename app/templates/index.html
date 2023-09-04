@@ -3,8 +3,9 @@
   <head>
     <title>{{ config.title }}</title>
     <link rel="icon" type="image/png" href="/assets/favicon.svg" />
-    <link rel="stylesheet" href="/assets/sortable.min.css" />
-    <script src="/assets/sortable.min.js"></script>
+    <link rel="stylesheet" href="/assets/style/sortable.min.css" />
+    <script src="/assets/script/sortable.min.js"></script>
+    <script src="/assets/script/drag-n-drop.js" defer></script>
     <link
       rel="stylesheet"
       href="/themes/default.css"
@@ -12,7 +13,11 @@
     />
     <link rel="stylesheet" href="/themes/dark.css" id="dark-mode-stylesheet" />
   </head>
-  <body>
+  <body id="drop-area">
+    <div id="flask-data" style="display: none">
+      <span id="flask-data-path">{{ path }}</span>
+      <span id="flask-data-title">{{ config.title }}</span>
+    </div>
     <div class="container">
       <h1><span class="header-icon">🌊</span>{{ config.title }}</h1>
       <h2>
