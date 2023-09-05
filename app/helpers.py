@@ -37,7 +37,7 @@ def read_json_file(file_path):  # Read the configuration file
         return None
 
 
-def render_html(path, config, directory, version, motd):
+def render_html(path, config, directory, version):
     if not path:
         path = config["root_directory"]
 
@@ -69,8 +69,7 @@ def render_html(path, config, directory, version, motd):
                                files=file_data,
                                path=path,
                                config=config,
-                               version=version,
-                               motd=motd)
+                               version=version)
     elif os.path.isfile(full_path):
         directory, filename = os.path.split(full_path)
         return send_from_directory(directory, filename)

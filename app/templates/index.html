@@ -19,11 +19,10 @@
     <div id="flask-data" style="display: none">
       <span id="flask-data-path">{{ path }}</span>
       <span id="flask-data-title">{{ config.title }}</span>
-      <span id="flask-data-motd">{{ motd.enabled }}</span>
     </div>
     <div id="motd-banner" class="motd-banner-hidden">
-      <span class="motd-title">{{ motd.title }}</span>
-      <span class="motd-message">{{ motd.message }}</span>
+      <span id="motd-title"></span>
+      <span id="motd-message"></span>
       <button id="close-motd">❌</button>
     </div>
     <div class="container">

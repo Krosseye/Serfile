@@ -20,9 +20,6 @@ static_directory = os.path.join(os.path.dirname(__file__), "static")
 # Define constants
 APP_VERSION = app_version
 CONFIG = read_json_file(config_file_path)
-MOTD = read_json_file(os.path.join(static_directory, "motd.json"))
-
-motd_status = MOTD['enabled']   # Check whether MOTD is enabled
 
 # Create root_directory if it doesn't exist
 root_directory_name = CONFIG["root_directory"]
@@ -38,10 +35,9 @@ if not os.path.exists(root_directory_path):
 @app.route("/<path:path>")
 def files_route(path):
     config = CONFIG
-    motd = MOTD
     version = APP_VERSION
     directory = static_directory
-    return render_html(path, config, directory, version, motd)
+    return render_html(path, config, directory, version)
 
 
 @app.route("/root/")
@@ -70,8 +66,11 @@ def get_info():
 
 @app.route('/api/motd', methods=['GET'])
 def get_motd():
+    motd = read_json_file(os.path.join(static_directory, "motd.json"))
+    motd_status = motd['enabled']   # Check whether MOTD is enabled
+
     if motd_status:
-        return MOTD
+        return motd
     else:
         return {"status": "disabled",
                 "message": "MOTD is currently disabled. Check back later for updates."}

@@ -190,7 +190,7 @@ a:hover {
   word-break: break-all;
 }
 
-.motd-title {
+#motd-title {
   font-weight: bold;
 }
 
