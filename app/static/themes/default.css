@@ -197,6 +197,7 @@ a:hover {
 #close-motd {
   background-color: var(--tertiary-color);
   border: var(--border);
+  font-family: "NotoEmoji", sans-serif;
   border-radius: 50%;
   padding: 5px 5px;
   cursor: pointer;
