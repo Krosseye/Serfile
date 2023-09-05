@@ -134,6 +134,7 @@ a:hover {
 .version {
   position: relative;
   padding: 20px;
+  padding-top: 0px;
   align-items: center;
   justify-content: center;
   text-align: center;
