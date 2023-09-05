@@ -7,8 +7,7 @@ from flask import render_template, send_from_directory
 from .file_icons import ICON_MAP
 
 
-# Get icon for a file or folder
-def get_file_icon(filename, is_folder=False):
+def get_file_icon(filename, is_folder=False):   # Get icon for a file or folder
     if is_folder:
         return "📁"
 
@@ -16,8 +15,7 @@ def get_file_icon(filename, is_folder=False):
     return ICON_MAP.get(extension, "📄")
 
 
-# Format file size in a human-readable way
-def format_size(size):
+def format_size(size):  # Format file size in a human-readable way
     units = ["Bytes", "KB", "MB", "GB", "TB"]
     unit_index = 0
     while size >= 1024 and unit_index < len(units) - 1:
@@ -25,24 +23,21 @@ def format_size(size):
         unit_index += 1
     return f"{size:.2f} {units[unit_index]}"
 
-# Read the configuration file
-def read_config():
-    # Get directory of current script
-    script_directory = os.path.dirname(os.path.abspath(__file__))
 
-    # Navigate up one directory to reach config.json
-    parent_directory = os.path.dirname(script_directory)
-
-    # Construct full path to config
-    config_file_path = os.path.join(parent_directory, "config.json")
-
-    # Read config
-    with open(config_file_path, "r") as config_file:
-        config = json.load(config_file)
-        return config
+def read_json_file(file_path):  # Read the configuration file
+    try:
+        with open(file_path, "r") as json_file:
+            data = json.load(json_file)
+        return data
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
+        return None
+    except json.JSONDecodeError as e:
+        print(f"Error decoding JSON in file {file_path}: {e}")
+        return None
 
 
-def render_html(path, config, directory, version):
+def render_html(path, config, directory, version, motd):
     if not path:
         path = config["root_directory"]
 
@@ -74,7 +69,8 @@ def render_html(path, config, directory, version):
                                files=file_data,
                                path=path,
                                config=config,
-                               version=version)
+                               version=version,
+                               motd=motd)
     elif os.path.isfile(full_path):
         directory, filename = os.path.split(full_path)
         return send_from_directory(directory, filename)

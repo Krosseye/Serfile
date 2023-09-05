@@ -1,90 +1,88 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{ config.title }}</title>
-    <link rel="icon" type="image/png" href="/assets/favicon.svg" />
-    <link rel="stylesheet" href="/assets/style/sortable.min.css" />
-    <script src="/assets/script/sortable.min.js"></script>
-    <script src="/assets/script/drag-n-drop.js" defer></script>
-    <link
-      rel="stylesheet"
-      href="/themes/default.css"
-      id="light-mode-stylesheet"
-    />
-    <link rel="stylesheet" href="/themes/dark.css" id="dark-mode-stylesheet" />
-  </head>
-  <body id="drop-area">
-    <div id="flask-data" style="display: none">
-      <span id="flask-data-path">{{ path }}</span>
-      <span id="flask-data-title">{{ config.title }}</span>
-    </div>
-    <div class="container">
-      <h1><span class="header-icon">🌊</span>{{ config.title }}</h1>
-      <h2>
-        / {% set path_parts = path.split('/') %} {% for i in
-        range(path_parts|length) %} {% set folder_path =
-        '/'.join(path_parts[:i+1]) %} {% if i == path_parts|length - 1 %} {{
-        path_parts[i] }} {% else %}
-        <a
-          class="directory"
-          href="{{ url_for('files_route', path=folder_path) }}"
-          >{{ path_parts[i] }}</a
-        >
-        / {% endif %} {% endfor %}
-      </h2>
-      <table class="sortable">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Size</th>
-            <th>Last Modified</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for file in files %}
-          <tr>
-            <td data-sort="{{ file.name }}">
-              <span class="icon">{{ file.icon }}</span
-              ><a
-                href="{{ url_for('files_route', path=path + '/' + file.name) }}"
-                >{{ file.name }}</a
-              >
-            </td>
-            <td data-sort="{{ file.size }}">{{ file.size_str }}</td>
-            <td>{{ file.modified.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    <footer class="version">
-      <span class="icon">🚀</span>Version: {{ version }}
-    </footer>
-  </body>
-  <script>
-    function darkModeEnabled() {
-      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+<head>
+  <title>{{ config.title }}</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.svg" />
+  <link rel="stylesheet" href="/assets/style/sortable.min.css" />
+  <script src="/assets/script/sortable.min.js"></script>
+  <script src="/assets/script/drag-n-drop.js" defer></script>
+  <script src="/assets/script/motd.js" defer></script>
+  <link rel="stylesheet" href="/themes/default.css" id="light-mode-stylesheet" />
+  <link rel="stylesheet" href="/themes/dark.css" id="dark-mode-stylesheet" />
+</head>
+
+<body id="drop-area">
+  <div id="flask-data" style="display: none">
+    <span id="flask-data-path">{{ path }}</span>
+    <span id="flask-data-title">{{ config.title }}</span>
+    <span id="flask-data-motd">{{ motd.enabled }}</span>
+  </div>
+  <div id="motd-banner" class="motd-banner-hidden">
+    <span class="motd-title">{{ motd.title }}</span>
+    <span class="motd-message">{{ motd.message }}</sp>
+      <button id="close-motd">❌</button>
+  </div>
+  <div class="container">
+    <h1><span class="header-icon">🌊</span>{{ config.title }}</h1>
+    <h2>
+      / {% set path_parts = path.split('/') %} {% for i in
+      range(path_parts|length) %} {% set folder_path =
+      '/'.join(path_parts[:i+1]) %} {% if i == path_parts|length - 1 %} {{
+      path_parts[i] }} {% else %}
+      <a class="directory" href="{{ url_for('files_route', path=folder_path) }}">{{ path_parts[i] }}</a>
+      / {% endif %} {% endfor %}
+    </h2>
+    <table class="sortable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Last Modified</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for file in files %}
+        <tr>
+          <td data-sort="{{ file.name }}">
+            <span class="icon">{{ file.icon }}</span><a
+              href="{{ url_for('files_route', path=path + '/' + file.name) }}">{{ file.name }}</a>
+          </td>
+          <td data-sort="{{ file.size }}">{{ file.size_str }}</td>
+          <td>{{ file.modified.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <footer class="version">
+    <span class="icon">🚀</span>Version: {{ version }}
+  </footer>
+</body>
+<script>
+  function darkModeEnabled() {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+
+  function toggleStylesheets() {
+    const lightModeStylesheet = document.getElementById(
+      "light-mode-stylesheet"
+    );
+    const darkModeStylesheet = document.getElementById(
+      "dark-mode-stylesheet"
+    );
+
+    if (darkModeEnabled()) {
+      darkModeStylesheet.disabled = false;
+    } else {
+      darkModeStylesheet.disabled = true;
     }
+  }
 
-    function toggleStylesheets() {
-      const lightModeStylesheet = document.getElementById(
-        "light-mode-stylesheet"
-      );
-      const darkModeStylesheet = document.getElementById(
-        "dark-mode-stylesheet"
-      );
+  window.addEventListener("load", toggleStylesheets);
 
-      if (darkModeEnabled()) {
-        darkModeStylesheet.disabled = false;
-      } else {
-        darkModeStylesheet.disabled = true;
-      }
-    }
-
-    window.addEventListener("load", toggleStylesheets);
-
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addListener(toggleStylesheets);
-  </script>
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addListener(toggleStylesheets);
+</script>
 </html>

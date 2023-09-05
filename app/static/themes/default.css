@@ -176,3 +176,35 @@ a:hover {
     width: 85%;
   }
 }
+
+#motd-banner {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 15px 0;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  display: none;
+  border-bottom: var(--border);
+  word-break: break-all;
+}
+
+.motd-title {
+  font-weight: bold;
+}
+
+#close-motd {
+  background-color: var(--tertiary-color);
+  border: var(--border);
+  border-radius: 50%;
+  padding: 5px 5px;
+  cursor: pointer;
+  position: absolute;
+  top: 11.5px;
+  left: 10px;
+}
+
+#close-motd:hover {
+  transform: scale(0.9);
+  background-color: var(--secondary-color);
+}

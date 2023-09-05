@@ -4,16 +4,25 @@ from datetime import datetime
 from flask import Flask, jsonify, redirect, request
 
 from .about import app_version, licenses
-from .helpers import format_size, get_file_icon, read_config, render_html
+from .helpers import format_size, get_file_icon, read_json_file, render_html
 
 app = Flask(__name__)
 
-# Define constants
-APP_VERSION = app_version
-CONFIG = read_config()
-
+# Get directory of current script
+script_directory = os.path.dirname(os.path.abspath(__file__))
+# Navigate up one directory
+parent_directory = os.path.dirname(script_directory)
+# Construct full path to config
+config_file_path = os.path.join(parent_directory, "config.json")
 # Serve files from "static" directory
 static_directory = os.path.join(os.path.dirname(__file__), "static")
+
+# Define constants
+APP_VERSION = app_version
+CONFIG = read_json_file(config_file_path)
+MOTD = read_json_file(os.path.join(static_directory, "motd.json"))
+
+motd_status = MOTD['enabled']   # Check whether MOTD is enabled
 
 # Create root_directory if it doesn't exist
 root_directory_name = CONFIG["root_directory"]
@@ -29,9 +38,10 @@ if not os.path.exists(root_directory_path):
 @app.route("/<path:path>")
 def files_route(path):
     config = CONFIG
+    motd = MOTD
     version = APP_VERSION
     directory = static_directory
-    return render_html(path, config, directory, version)
+    return render_html(path, config, directory, version, motd)
 
 
 @app.route("/root/")
@@ -56,6 +66,15 @@ def get_greeting():
 @app.route('/api/licenses', methods=['GET'])
 def get_info():
     return licenses
+
+
+@app.route('/api/motd', methods=['GET'])
+def get_motd():
+    if motd_status:
+        return MOTD
+    else:
+        return {"status": "disabled",
+                "message": "MOTD is currently disabled. Check back later for updates."}
 
 
 @app.route("/api/list/<path:path>", methods=['GET'])
