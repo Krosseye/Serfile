@@ -2,7 +2,9 @@ import json
 import os
 from datetime import datetime
 
+from cssmin import cssmin
 from flask import render_template, send_from_directory
+from jsmin import jsmin
 
 from .file_icons import ICON_MAP
 
@@ -35,6 +37,23 @@ def read_json_file(file_path):  # Read the configuration file
     except json.JSONDecodeError as e:
         print(f"Error decoding JSON in file {file_path}: {e}")
         return None
+
+
+def minify_files(directory_path, file_extension):
+    for filename in os.listdir(directory_path):
+        if filename.endswith(file_extension) and not filename.endswith(f".min{file_extension}"):
+            file_folder = os.path.join(directory_path)
+            minified_path = os.path.join(file_folder, filename.replace(file_extension, f".min{file_extension}"))
+
+            print(f" * Minifying {filename}")
+            with open(os.path.join(file_folder, filename), 'r') as file:
+                if file_extension == ".css":
+                    minified_code = cssmin(file.read())
+                elif file_extension == ".js":
+                    minified_code = jsmin(file.read())
+
+            with open(minified_path, 'w') as minified_file:
+                minified_file.write(minified_code)
 
 
 def render_html(path, config, directory, version):

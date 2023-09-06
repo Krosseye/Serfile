@@ -4,7 +4,8 @@ from datetime import datetime
 from flask import Flask, jsonify, redirect, request
 
 from .about import app_version, licenses
-from .helpers import format_size, get_file_icon, read_json_file, render_html
+from .helpers import (format_size, get_file_icon, minify_files, read_json_file,
+                      render_html)
 
 app = Flask(__name__)
 
@@ -27,6 +28,9 @@ root_directory_path = os.path.join(static_directory, root_directory_name)
 if not os.path.exists(root_directory_path):
     os.makedirs(root_directory_path)
 
+# Minify JS and CSS files
+minify_files(os.path.join(app.root_path, 'static', 'assets', 'js'), '.js')
+minify_files(os.path.join(app.root_path, 'static', 'assets', 'css'),'.css')
 
 # ---Web-UI Routes---
 
