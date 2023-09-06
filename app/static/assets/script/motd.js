@@ -1,5 +1,18 @@
+function isMotdBannerClosed() {
+  return sessionStorage.getItem("motdClosed") === "true";
+}
+
+function setMotdBannerClosed() {
+  sessionStorage.setItem("motdClosed", "true");
+}
+
 // Fetch MOTD data from API
 function fetchMotdData() {
+  // Check if MOTD banner is closed in session storage
+  if (isMotdBannerClosed()) {
+    return;
+  }
+
   fetch("/api/motd")
     .then((response) => {
       if (!response.ok) {
@@ -36,9 +49,10 @@ function updateMotdDisplay(isMotdEnabled, title, message) {
   }
 }
 
-// Close MOTD banner
+// Close MOTD banner and set session storage
 function closeMotd(motdBanner) {
   motdBanner.style.display = "none";
+  setMotdBannerClosed();
 }
 
 // Show MOTD banner
