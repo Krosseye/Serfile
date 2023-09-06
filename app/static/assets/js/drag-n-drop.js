@@ -1,6 +1,7 @@
 const dropArea = document.getElementById("drop-area");
 const path = document.getElementById("flask-data-path").textContent;
 const uploadOverlay = document.getElementById("upload-overlay");
+const body = document.getElementById("body");
 
 // Handle file drop
 function handleFileDrop(e) {
@@ -64,3 +65,11 @@ dropArea.addEventListener("dragover", (e) => {
 
 dropArea.addEventListener("drop", handleFileDrop);
 dropArea.addEventListener("dragleave", handleDragLeave);
+
+// Prevent default drag-n-drop behavior for body
+body.addEventListener("dragenter", preventDefaultBehavior);
+body.addEventListener("dragover", preventDefaultBehavior);
+body.addEventListener("drop", preventDefaultBehavior);
+function preventDefaultBehavior(event) {
+  event.preventDefault();
+}
