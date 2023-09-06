@@ -88,7 +88,8 @@ def render_html(path, config, directory, version):
                                files=file_data,
                                path=path,
                                config=config,
-                               version=version)
+                               version=version,
+                               is_folder=is_folder)
     elif os.path.isfile(full_path):
         directory, filename = os.path.split(full_path)
         return send_from_directory(directory, filename)

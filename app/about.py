@@ -1,4 +1,4 @@
-app_version = "0.8.1 (Alpha Pre-release)"
+app_version = "0.8.2 (Alpha Pre-release)"
 
 licenses = {
     "assets": [
