@@ -1,4 +1,4 @@
-app_version = "0.6.5 (Alpha Pre-release)"
+app_version = "0.7.0 (Alpha Pre-release)"
 
 licenses = {
     "assets": [
@@ -13,7 +13,7 @@ licenses = {
             "license": "SIL Open Font License, version 1.1"
         },
         {
-            "name": "sortable.js",
+            "name": "sortable",
             "version": "2.3.2",
             "license": "The Unlicense"
         }

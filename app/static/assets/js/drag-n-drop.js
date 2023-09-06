@@ -1,23 +1,19 @@
 const dropArea = document.getElementById("drop-area");
 const path = document.getElementById("flask-data-path").textContent;
-const title = document.getElementById("flask-data-title").textContent;
-
-function updateDocumentTitle(newTitle) {
-  document.title = newTitle;
-}
+const uploadOverlay = document.getElementById("upload-overlay");
 
 // Handle file drop
 function handleFileDrop(e) {
   e.preventDefault();
   const files = e.dataTransfer.files;
   uploadFiles(files);
-  updateDocumentTitle(title);
+  uploadOverlay.style.display = "none";
 }
 
 // Handle drag leave event
 function handleDragLeave(e) {
   e.preventDefault();
-  updateDocumentTitle(title);
+  uploadOverlay.style.display = "none";
 }
 
 // Handle file upload
@@ -63,7 +59,7 @@ function handleUploadError() {
 // Event listeners
 dropArea.addEventListener("dragover", (e) => {
   e.preventDefault();
-  updateDocumentTitle(`🖱️➡️📂 ${title}`);
+  uploadOverlay.style.display = "flex";
 });
 
 dropArea.addEventListener("drop", handleFileDrop);
