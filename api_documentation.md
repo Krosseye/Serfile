@@ -57,6 +57,28 @@ Response:
 }
 ```
 
+## Get MOTD
+
+Returns the Message of The Day (MOTD) of the Serfile app.
+
+- Endpoint: /motd
+- Method: GET
+- Example: Retrieve MOTD using curl
+
+```bash
+curl http://localhost:8080/api/motd
+```
+
+Response:
+
+```json
+{
+  "enabled": true,
+  "message": "This is an example of the MOTD functionality.",
+  "title": "Hello World!"
+}
+```
+
 ## List Directory
 
 Lists the contents of a specified directory along with information about each file.
