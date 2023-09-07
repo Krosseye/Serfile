@@ -46,7 +46,8 @@
           {% for file in files %}
           <tr>
             <td data-sort="{{ file.name }}">
-              <span class="icon">{{ file.icon }}</span>{% if is_folder %}
+              <span class="icon">{{ file.icon }}</span>
+              {% if file.is_dir %}
               <a
                 href="{{ url_for('files_route', path=path + '/' + file.name) }}"
                 target="_self"

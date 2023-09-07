@@ -9,8 +9,8 @@ from jsmin import jsmin
 from .file_icons import ICON_MAP
 
 
-def get_file_icon(filename, is_folder=False):   # Get icon for a file or folder
-    if is_folder:
+def get_file_icon(filename, is_dir=False):   # Get icon for a file or folder
+    if is_dir:
         return "📁"
 
     extension = os.path.splitext(filename)[1].lower()
@@ -43,7 +43,8 @@ def minify_files(directory_path, file_extension):
     for filename in os.listdir(directory_path):
         if filename.endswith(file_extension) and not filename.endswith(f".min{file_extension}"):
             file_folder = os.path.join(directory_path)
-            minified_path = os.path.join(file_folder, filename.replace(file_extension, f".min{file_extension}"))
+            minified_path = os.path.join(file_folder, filename.replace(
+                file_extension, f".min{file_extension}"))
 
             print(f" * Minifying {filename}")
             with open(os.path.join(file_folder, filename), 'r') as file:
@@ -67,29 +68,29 @@ def render_html(path, config, directory, version):
         file_data = []
         for file in files:
             file_path = os.path.join(full_path, file)
-            is_folder = os.path.isdir(file_path)
+            is_dir = os.path.isdir(file_path)
             size = os.path.getsize(file_path)
             size_str = format_size(size)
-            if is_folder:
+            if is_dir:
                 size_str = "—"
             modified_time = os.path.getmtime(file_path)
             modified_datetime = datetime.fromtimestamp(modified_time)
-            icon = get_file_icon(file, is_folder)
+            icon = get_file_icon(file, is_dir)
             file_data.append({
                 "name": file,
                 "link": os.path.join(path, file),
                 "size": size,
                 "size_str": size_str,
                 "modified": modified_datetime,
-                "icon": icon
+                "icon": icon,
+                "is_dir": is_dir
             })
 
         return render_template("index.html",
                                files=file_data,
                                path=path,
                                config=config,
-                               version=version,
-                               is_folder=is_folder)
+                               version=version)
     elif os.path.isfile(full_path):
         directory, filename = os.path.split(full_path)
         return send_from_directory(directory, filename)
