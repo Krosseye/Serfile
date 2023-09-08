@@ -27,7 +27,9 @@ if not os.path.exists(root_directory_path):
 
 # Minify JS and CSS files
 if CONFIG['environment'] == 'prod' or CONFIG['environment'] == 'production':
-    helpers.minify_files(os.path.join(app.root_path, 'static', 'assets', 'js'), '.js')
-    helpers.minify_files(os.path.join(app.root_path, 'static', 'assets', 'css'),'.css')
+    helpers.minify_files(os.path.join(app.root_path,
+                                      'static', 'assets', 'js'), '.js')
+    helpers.minify_files(os.path.join(app.root_path,
+                                      'static', 'assets', 'css'), '.css')
 
 from app import routes
