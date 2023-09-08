@@ -71,7 +71,8 @@ Modify the `config.json` file to customize settings.
   "port": 8080,
   "host": "0.0.0.0",
   "title": "Serfile",
-  "root_directory": "root"
+  "root_directory": "root",
+  "environment": "prod" // Options are prod/production or dev/develop
 }
 ```
 
@@ -90,11 +91,9 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - /path/to/serve:/app/app/static/root
+      - /path/to/serve:/app/app/static/root # Make sure to modify `/path/to/serve`
     restart: unless-stopped
 ```
-
-Make sure to modify `/path/to/serve`.
 
 ## Preview
 

@@ -4,11 +4,10 @@
     <title>{{ config.title }}</title>
     <link rel="icon" type="image/png" href="/assets/favicon.svg" />
     {% if is_prod %}
-    <link rel="stylesheet" href="/assets/css/default.min.css" />
-    <script src="/assets/js/motd.min.js" defer></script>
+    <link rel="stylesheet" href="/assets/css/styles.min.css" />
     {% else %}
     <link rel="stylesheet" href="/assets/css/default.css" />
-    <script src="/assets/js/motd.js" defer></script>
+    <link rel="stylesheet" href="/assets/css/sortable-base.css" />
     {% endif %}
   </head>
   <body id="body">
@@ -85,11 +84,9 @@
     </footer>
   </body>
   {% if is_prod %}
-  <link rel="stylesheet" href="/assets/css/sortable-base.min.css" />
-  <script src="/assets/js/sortable.min.js" defer></script>
-  <script src="/assets/js/drag-n-drop.min.js" defer></script>
+  <script src="/assets/js/scripts.min.js"></script>
   {% else %}
-  <link rel="stylesheet" href="/assets/css/sortable-base.css" />
+  <script src="/assets/js/motd.js" defer></script>
   <script src="/assets/js/sortable.js" defer></script>
   <script src="/assets/js/drag-n-drop.js" defer></script>
   {% endif %}

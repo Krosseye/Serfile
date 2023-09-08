@@ -25,11 +25,13 @@ root_directory_path = os.path.join(static_directory, root_directory_name)
 if not os.path.exists(root_directory_path):
     os.makedirs(root_directory_path)
 
-# Minify JS and CSS files
+# Minify and bundle JS and CSS files
 if CONFIG['environment'] == 'prod' or CONFIG['environment'] == 'production':
-    helpers.minify_files(os.path.join(app.root_path,
-                                      'static', 'assets', 'js'), '.js')
-    helpers.minify_files(os.path.join(app.root_path,
-                                      'static', 'assets', 'css'), '.css')
+    helpers.minify_and_bundle_files(os.path.join(app.root_path,
+                                                 'static', 'assets', 'js'),
+                                    'scripts', '.js')
+    helpers.minify_and_bundle_files(os.path.join(app.root_path,
+                                                 'static', 'assets', 'css'),
+                                    'styles', '.css')
 
 from app import routes

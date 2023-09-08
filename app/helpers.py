@@ -38,22 +38,33 @@ def read_json_file(file_path):  # Read the configuration file
         return None
 
 
-def minify_files(directory_path, file_extension):
+def minify_and_bundle_files(directory_path, bundle_name, file_extension):
+    css_code = ""
+    js_code = ""
+
     for filename in os.listdir(directory_path):
         if filename.endswith(file_extension) and not filename.endswith(f".min{file_extension}"):
-            file_folder = os.path.join(directory_path)
-            minified_path = os.path.join(file_folder, filename.replace(
-                file_extension, f".min{file_extension}"))
+            with open(os.path.join(directory_path, filename), 'r', encoding='utf-8') as file:
+                file_content = file.read()
 
-            print(f" * Minifying {filename}")
-            with open(os.path.join(file_folder, filename), 'r') as file:
                 if file_extension == ".css":
-                    minified_code = cssmin(file.read())
+                    css_code += file_content
                 elif file_extension == ".js":
-                    minified_code = jsmin(file.read())
+                    js_code += file_content
 
-            with open(minified_path, 'w') as minified_file:
-                minified_file.write(minified_code)
+    if css_code:
+        minified_css_code = cssmin(css_code)
+        bundle_css_filename = f"{bundle_name}.min{file_extension}"
+        with open(os.path.join(directory_path, bundle_css_filename), 'w', encoding='utf-8') as css_file:
+            css_file.write(minified_css_code)
+        print(f"* Bundled and minified CSS files into {bundle_css_filename}")
+
+    if js_code:
+        minified_js_code = jsmin(js_code)
+        bundle_js_filename = f"{bundle_name}.min{file_extension}"
+        with open(os.path.join(directory_path, bundle_js_filename), 'w', encoding='utf-8') as js_file:
+            js_file.write(minified_js_code)
+        print(f"* Bundled and minified JS files into {bundle_js_filename}")
 
 
 def get_environment(config):
