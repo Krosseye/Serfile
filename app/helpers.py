@@ -57,11 +57,23 @@ def minify_files(directory_path, file_extension):
                 minified_file.write(minified_code)
 
 
+def get_environment(config):
+    environment = config['environment']
+    
+    if environment == 'production' or environment == 'prod':
+        is_prod = True
+        return is_prod
+    elif environment == 'development' or environment == 'dev':
+        is_prod = False
+        return is_prod
+        
 def render_html(path, config, directory, version):
     if not path:
         path = config["root_directory"]
 
     full_path = os.path.join(directory, path)
+    
+    is_prod = get_environment(config)
 
     if os.path.isdir(full_path):
         files = os.listdir(full_path)
@@ -90,7 +102,8 @@ def render_html(path, config, directory, version):
                                files=file_data,
                                path=path,
                                config=config,
-                               version=version)
+                               version=version,
+                               is_prod=is_prod)
     elif os.path.isfile(full_path):
         directory, filename = os.path.split(full_path)
         return send_from_directory(directory, filename)

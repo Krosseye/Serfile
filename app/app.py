@@ -29,8 +29,9 @@ if not os.path.exists(root_directory_path):
     os.makedirs(root_directory_path)
 
 # Minify JS and CSS files
-minify_files(os.path.join(app.root_path, 'static', 'assets', 'js'), '.js')
-minify_files(os.path.join(app.root_path, 'static', 'assets', 'css'),'.css')
+if CONFIG['environment'] == 'prod' or CONFIG['environment'] == 'production':
+    minify_files(os.path.join(app.root_path, 'static', 'assets', 'js'), '.js')
+    minify_files(os.path.join(app.root_path, 'static', 'assets', 'css'),'.css')
 
 # ---Web-UI Routes---
 

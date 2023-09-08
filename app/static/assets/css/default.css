@@ -201,7 +201,7 @@ a:hover {
   font-weight: bold;
 }
 
-#close-motd {
+.close-button {
   background-color: var(--tertiary-color);
   border: var(--border);
   font-family: var(--emoji-font);
@@ -211,21 +211,25 @@ a:hover {
   position: absolute;
   top: 11.5px;
   left: 10px;
+  pointer-events: all;
 }
 
-#close-motd:hover {
+.close-button:hover {
   transform: scale(0.9);
   background-color: var(--secondary-color);
 }
 
-#upload-overlay {
+.overlay {
   background-color: var(--primary-color);
   border: var(--border);
   border-radius: var(--border-radius);
   pointer-events: none;
-  position: absolute;
+  position: fixed; /* Use fixed position */
   width: fit-content;
   height: fit-content;
+  top: 50%; /* Vertically center */
+  left: 50%; /* Horizontally center */
+  transform: translate(-50%, -50%); /* Center it perfectly */
   z-index: 999;
   display: none;
   flex-direction: column;
@@ -235,7 +239,7 @@ a:hover {
   padding: 4rem;
 }
 
-#upload-icon {
+.overlay-icon {
   text-align: center;
   margin-top: 20px;
   font-size: 2.5rem;

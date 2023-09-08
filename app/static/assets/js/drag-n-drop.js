@@ -2,13 +2,26 @@ const dropArea = document.getElementById("drop-area");
 const path = document.getElementById("flask-data-path").textContent;
 const uploadOverlay = document.getElementById("upload-overlay");
 const body = document.getElementById("body");
+const progressDiv = document.getElementById("upload-progress");
+const progressOverlay = document.getElementById("upload-progress-overlay"); // Add this line
+
+let totalFiles = 0;
+let currentFileIndex = 0;
+let successfulUploads = 0;
 
 // Handle file drop
 function handleFileDrop(e) {
   e.preventDefault();
-  const files = e.dataTransfer.files;
-  uploadFiles(files);
-  uploadOverlay.style.display = "none";
+  if (e.dataTransfer.types.includes("Files")) {
+    const files = e.dataTransfer.files;
+    totalFiles = files.length;
+    currentFileIndex = 0;
+    successfulUploads = 0;
+    document.getElementById("upload-progress-icon").textContent = "⏳";
+    progressOverlay.style.display = "flex"; // Show the progress overlay
+    uploadNextFile(files);
+    uploadOverlay.style.display = "none";
+  }
 }
 
 // Handle drag leave event
@@ -18,39 +31,70 @@ function handleDragLeave(e) {
 }
 
 // Handle file upload
-function uploadFiles(files) {
-  const formData = new FormData();
-  for (const file of files) {
+function uploadNextFile(files) {
+  if (currentFileIndex < totalFiles) {
+    const file = files[currentFileIndex];
+    const formData = new FormData();
     formData.append("file", file);
-  }
 
-  const directory = path;
-  const overwrite = false;
+    const directory = path;
+    const overwrite = false;
 
-  // Send files to API endpoint
-  fetch(`/api/upload/${directory}?overwrite=${overwrite}`, {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data.message);
+    progressDiv.textContent = `Uploading file ${
+      currentFileIndex + 1
+    } of ${totalFiles}`;
 
-      // Check if upload was successful
-      if (
-        data.message === "File uploaded successfully" ||
-        data.message === "File overwritten successfully"
-      ) {
-        window.location.reload();
-      } else {
-        handleUploadError();
-      }
+    // Send the file to the API endpoint
+    fetch(`/api/upload/${directory}?overwrite=${overwrite}`, {
+      method: "POST",
+      body: formData,
     })
-    .catch((error) => {
-      console.error("File upload failed:", error);
-      handleUploadError();
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.message);
+
+        // Check if upload was successful
+        if (
+          data.message === "File uploaded successfully" ||
+          data.message === "File overwritten successfully"
+        ) {
+          successfulUploads++;
+        } else {
+          // handleUploadError();
+        }
+
+        currentFileIndex++;
+        uploadNextFile(files); // Upload the next file
+
+        // Check if all files are uploaded
+        if (currentFileIndex === totalFiles) {
+          // All files have been uploaded
+          if (successfulUploads === totalFiles) {
+            progressDiv.textContent = "All files uploaded successfully";
+          } else {
+            document.getElementById("upload-progress-icon").textContent = "🤕";
+            progressDiv.textContent = "Some files failed to upload";
+          }
+          // Refresh the page after all files are successfully uploaded
+          if (successfulUploads === totalFiles) {
+            window.location.reload();
+            progressOverlay.style.display = "none"; // Hide the progress overlay
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("File upload failed:", error);
+        // handleUploadError();
+        currentFileIndex++;
+        uploadNextFile(files); // Upload the next file
+      });
+  }
 }
+
+const closeButton = document.getElementById("close-upload-progress-overlay");
+closeButton.addEventListener("click", function () {
+  document.getElementById("upload-progress-overlay").style.display = "none";
+});
 
 // Handle upload errors
 function handleUploadError() {
@@ -60,7 +104,9 @@ function handleUploadError() {
 // Event listeners
 dropArea.addEventListener("dragover", (e) => {
   e.preventDefault();
-  uploadOverlay.style.display = "flex";
+  if (e.dataTransfer.types.includes("Files")) {
+    uploadOverlay.style.display = "flex";
+  }
 });
 
 dropArea.addEventListener("drop", handleFileDrop);

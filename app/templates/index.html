@@ -3,22 +3,34 @@
   <head>
     <title>{{ config.title }}</title>
     <link rel="icon" type="image/png" href="/assets/favicon.svg" />
+    {% if is_prod %}
     <link rel="stylesheet" href="/assets/css/default.min.css" />
     <script src="/assets/js/motd.min.js" defer></script>
+    {% else %}
+    <link rel="stylesheet" href="/assets/css/default.css" />
+    <script src="/assets/js/motd.js" defer></script>
+    {% endif %}
   </head>
   <body id="body">
     <div id="flask-data" style="display: none">
       <span id="flask-data-path">{{ path }}</span>
       <span id="flask-data-title">{{ config.title }}</span>
     </div>
-    <div id="upload-overlay">
-      <span class="header-icon" id="upload-icon">🖱️➡️📂</span>
+    <div class="overlay" id="upload-overlay">
+      <span class="overlay-icon">🖱️➡️📂</span>
       <h2>Drop to upload your files</h2>
+    </div>
+    <div class="overlay" id="upload-progress-overlay">
+      <span class="overlay-icon" id="upload-progress-icon">⏳</span>
+      <h2 id="upload-progress"></h2>
+      <button class="close-button" id="close-upload-progress-overlay">
+        ❌
+      </button>
     </div>
     <div id="motd-banner" class="motd-banner-hidden">
       <span id="motd-title"></span>
       <span id="motd-message"></span>
-      <button id="close-motd">❌</button>
+      <button class="close-button" id="close-motd">❌</button>
     </div>
     <div class="container" id="drop-area">
       <h1><span class="header-icon">🌊</span>{{ config.title }}</h1>
@@ -72,7 +84,13 @@
       <span class="icon">🚀</span>Version: {{ version }}
     </footer>
   </body>
+  {% if is_prod %}
   <link rel="stylesheet" href="/assets/css/sortable-base.min.css" />
   <script src="/assets/js/sortable.min.js" defer></script>
   <script src="/assets/js/drag-n-drop.min.js" defer></script>
+  {% else %}
+  <link rel="stylesheet" href="/assets/css/sortable-base.css" />
+  <script src="/assets/js/sortable.js" defer></script>
+  <script src="/assets/js/drag-n-drop.js" defer></script>
+  {% endif %}
 </html>
