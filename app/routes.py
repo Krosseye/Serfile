@@ -1,37 +1,8 @@
 import os
 from datetime import datetime
 
-from flask import Flask, jsonify, redirect, request
-
-from .about import app_version, licenses
-from .helpers import (format_size, get_file_icon, minify_files, read_json_file,
-                      render_html)
-
-app = Flask(__name__)
-
-# Get directory of current script
-script_directory = os.path.dirname(os.path.abspath(__file__))
-# Navigate up one directory
-parent_directory = os.path.dirname(script_directory)
-# Construct full path to config
-config_file_path = os.path.join(parent_directory, "config.json")
-# Serve files from "static" directory
-static_directory = os.path.join(os.path.dirname(__file__), "static")
-
-# Define constants
-APP_VERSION = app_version
-CONFIG = read_json_file(config_file_path)
-
-# Create root_directory if it doesn't exist
-root_directory_name = CONFIG["root_directory"]
-root_directory_path = os.path.join(static_directory, root_directory_name)
-if not os.path.exists(root_directory_path):
-    os.makedirs(root_directory_path)
-
-# Minify JS and CSS files
-if CONFIG['environment'] == 'prod' or CONFIG['environment'] == 'production':
-    minify_files(os.path.join(app.root_path, 'static', 'assets', 'js'), '.js')
-    minify_files(os.path.join(app.root_path, 'static', 'assets', 'css'),'.css')
+from app import APP_VERSION, CONFIG, LICENSES, app, helpers, static_directory
+from flask import jsonify, redirect, request
 
 # ---Web-UI Routes---
 
@@ -42,7 +13,7 @@ def files_route(path):
     config = CONFIG
     version = APP_VERSION
     directory = static_directory
-    return render_html(path, config, directory, version)
+    return helpers.render_html(path, config, directory, version)
 
 
 @app.route("/root/")
@@ -66,12 +37,12 @@ def get_greeting():
 
 @app.route('/api/licenses', methods=['GET'])
 def get_info():
-    return licenses
+    return LICENSES
 
 
 @app.route('/api/motd', methods=['GET'])
 def get_motd():
-    motd = read_json_file(os.path.join(static_directory, "motd.json"))
+    motd = helpers.read_json_file(os.path.join(static_directory, "motd.json"))
     motd_status = motd['enabled']   # Check whether MOTD is enabled
 
     if motd_status:
@@ -91,12 +62,12 @@ def list_files_json(path):
             file_path = os.path.join(full_path, file)
             is_folder = os.path.isdir(file_path)
             size = os.path.getsize(file_path)
-            size_str = format_size(size)
+            size_str = helpers.format_size(size)
             if is_folder:
                 size_str = "—"
             modified_time = os.path.getmtime(file_path)
             modified_datetime = datetime.fromtimestamp(modified_time)
-            icon = get_file_icon(file, is_folder)
+            icon = helpers.get_file_icon(file, is_folder)
 
             link_path = os.path.join(path, file).replace(os.path.sep, '/')
 

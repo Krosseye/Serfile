@@ -1,4 +1,4 @@
-from app.app import CONFIG, app
+from app import CONFIG, app
 from waitress import serve
 
 if __name__ == "__main__":

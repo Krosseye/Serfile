@@ -2,11 +2,10 @@ import json
 import os
 from datetime import datetime
 
+from app.file_icons import ICON_MAP
 from cssmin import cssmin
 from flask import render_template, send_from_directory
 from jsmin import jsmin
-
-from .file_icons import ICON_MAP
 
 
 def get_file_icon(filename, is_dir=False):   # Get icon for a file or folder
@@ -59,20 +58,21 @@ def minify_files(directory_path, file_extension):
 
 def get_environment(config):
     environment = config['environment']
-    
+
     if environment == 'production' or environment == 'prod':
         is_prod = True
         return is_prod
     elif environment == 'development' or environment == 'dev':
         is_prod = False
         return is_prod
-        
+
+
 def render_html(path, config, directory, version):
     if not path:
         path = config["root_directory"]
 
     full_path = os.path.join(directory, path)
-    
+
     is_prod = get_environment(config)
 
     if os.path.isdir(full_path):
