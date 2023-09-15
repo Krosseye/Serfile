@@ -67,7 +67,7 @@ function shouldShowMotd() {
   }
 
   const motdBanner = document.getElementById("motd-banner");
-  if (motdBanner.style.display !== "block") {
+  if (motdBanner.style.display !== "flex") {
     showMotd(motdBanner);
   }
 }
@@ -78,7 +78,7 @@ function closeMotd(motdBanner) {
 }
 
 function showMotd(motdBanner) {
-  motdBanner.style.display = "block";
+  motdBanner.style.display = "flex";
 }
 
 const motdFetched = sessionStorage.getItem("motdFetched") === "true";

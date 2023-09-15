@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/assets/css/styles.min.css" />
     {% else %}
     <link rel="stylesheet" href="/assets/css/default.css" />
-    <link rel="stylesheet" href="/assets/css/sortable-base.css" />
+    <link rel="stylesheet" href="/assets/css/sortable.css" />
     {% endif %}
   </head>
   <body id="body">
@@ -26,13 +26,41 @@
         ❌
       </button>
     </div>
-    <div id="motd-banner" class="motd-banner-hidden">
-      <span id="motd-title"></span>
-      <span id="motd-message"></span>
-      <button class="close-button" id="close-motd">❌</button>
+    <div class="header">
+      <span
+        title="Home"
+        class="header-title"
+        id="home-button"
+        onclick="window.location.href='/';"
+        ><span
+          ><span class="header-icon">🌊</span>{{ config.title }}</span
+        ></span
+      >
+      <div class="buttons"></div>
+    </div>
+    <div id="motd-banner" class="header">
+      <span class="header-title"
+        ><span><span class="header-icon">📢</span>MOTD</span></span
+      >
+      <span class="header-title" id="motd-content">
+        <span id="motd-title"></span>
+        <span id="motd-message"></span>
+      </span>
+      <div class="buttons">
+        <button title="Close" id="close-motd">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="ionicon"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
     <div class="container" id="drop-area">
-      <h1><span class="header-icon">🌊</span>{{ config.title }}</h1>
       <h2>
         / {% set path_parts = path.split('/') %} {% for i in
         range(path_parts|length) %} {% set folder_path =
@@ -48,9 +76,9 @@
       <table class="sortable">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Size</th>
-            <th>Last Modified</th>
+            <th title="Sort by Name">Name</th>
+            <th title="Sort by Size">Size</th>
+            <th title="Sort by Last Modified">Last Modified</th>
           </tr>
         </thead>
         <tbody>
@@ -88,6 +116,6 @@
   {% else %}
   <script src="/assets/js/motd.js" defer></script>
   <script src="/assets/js/sortable.js" defer></script>
-  <script src="/assets/js/drag-n-drop.js" defer></script>
+  <script src="/assets/js/drag-n-drop.js'" defer></script>
   {% endif %}
 </html>

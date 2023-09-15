@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 
 from app import APP_VERSION, CONFIG, LICENSES, app, helpers, static_directory
-from flask import jsonify, redirect, request
+from flask import jsonify, redirect, render_template, request
 
 # ---Web-UI Routes---
 
@@ -21,6 +21,23 @@ def files_route(path):
 def redirect_to_main_page():
     return redirect("/", code=302)
 
+
+@app.route("/edit/<path:path>")
+def edit_file(path):
+    config = CONFIG
+    file_path = os.path.normpath(os.path.join(static_directory, path))
+
+    if not os.path.exists(file_path) or not os.path.isfile(file_path):
+        return "File not found", 404
+
+    with open(file_path, 'r', encoding='utf-8') as file:
+        file_contents = file.read()
+
+    # Render Ace editor template
+    return render_template('editor.html',
+                           file_contents=file_contents,
+                           config=config,
+                           file_path=path)
 
 # ---API Routes---
 
@@ -83,6 +100,20 @@ def list_files_json(path):
         return "Not Found", 404
 
 
+@app.route("/api/update/<path:path>", methods=["POST"])
+def update_file(path):
+    data = request.files.get("file")
+
+    file_path = os.path.normpath(os.path.join(static_directory, path))
+
+    if not os.path.exists(file_path) or not os.path.isfile(file_path):
+        return jsonify({"message": "File not found"}), 404
+
+    data.save(file_path)
+
+    return jsonify({"message": "File updated successfully"})
+
+
 @app.route('/api/upload/<path:directory>', methods=['POST'])
 @app.route('/api/upload/<path:directory>/<path:subdirectory>', methods=['POST'])
 def upload_file(directory='', subdirectory=''):
@@ -106,7 +137,7 @@ def upload_file(directory='', subdirectory=''):
 
         file_path = os.path.join(target_directory, uploaded_file.filename)
 
-        # Get the 'overwrite' parameter from the request
+        # Get 'overwrite' parameter from request
         overwrite = request.args.get('overwrite', '').lower() == 'true'
 
         if os.path.exists(file_path) and not overwrite:

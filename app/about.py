@@ -1,4 +1,4 @@
-app_version = "0.9.2 (Alpha Pre-release)"
+app_version = "0.10.0 (Alpha Pre-release)"
 
 licenses = {
     "assets": [
@@ -9,13 +9,23 @@ licenses = {
         },
         {
             "name": "Inter Font",
-            "version": "v3.19",
+            "version": "3.19",
             "license": "SIL Open Font License, version 1.1"
         },
         {
-            "name": "sortable",
+            "name": "Sortable",
             "version": "2.3.2",
             "license": "The Unlicense"
+        },
+        {
+            "name": "Ace",
+            "version": "1.5.0",
+            "license": "Copyright (c) 2010, Ajax.org B.V. All rights reserved."
+        },
+        {
+            "name": "Fira Code",
+            "version": "6.3",
+            "license": "SIL Open Font License, version 1.1"
         }
     ]
 }

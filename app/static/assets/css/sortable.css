@@ -41,3 +41,33 @@
   color: inherit;
   content: "▴";
 }
+
+.sortable td {
+  color: var(--text-color);
+}
+
+.sortable thead th {
+  background: var(--secondary-color);
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.sortable th:last-child {
+  border-top-right-radius: 0;
+}
+
+.sortable th:first-child {
+  border-top-left-radius: 0;
+}
+
+.sortable tbody tr:nth-child(odd) {
+  background-color: var(--primary-color);
+}
+
+.sortable tbody tr:nth-child(even) {
+  background-color: var(--tertiary-color);
+}
+
+.sortable tbody tr:hover {
+  background-color: var(--secondary-color);
+}

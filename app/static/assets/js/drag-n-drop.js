@@ -42,7 +42,7 @@ function uploadNextFile(files) {
 
     progressDiv.textContent = `Uploading file ${
       currentFileIndex + 1
-    } of ${totalFiles}`;
+    }  of ${totalFiles}`;
 
     // Send the file to the API endpoint
     fetch(`/api/upload/${directory}?overwrite=${overwrite}`, {

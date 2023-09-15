@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ config.title }} Editor</title>
+    <link rel="icon" type="image/png" href="/assets/favicon.svg" />
+    <link rel="stylesheet" href="/assets/css/default.css" />
+    <link rel="stylesheet" href="/assets/css/editor.css" />
+    <script
+      src="/assets/js/ace/ace.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="/assets/js/ace/ext-modelist.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+  </head>
+  <body>
+    <div class="header">
+      <span
+        title="Home"
+        class="header-title"
+        id="home-button"
+        onclick="window.location.href='/';"
+        ><span
+          ><span class="header-icon">🌊</span>{{ config.title }}</span
+        ></span
+      >
+      <span>{{ file_path }}</span>
+      <div class="buttons">
+        <button title="Save" id="editor-save-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="ionicon"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M465.94 119.76l-73.7-73.7A47.68 47.68 0 00358.3 32H96a64 64 0 00-64 64v320a64 64 0 0064 64h320a64 64 0 0064-64V153.7a47.68 47.68 0 00-14.06-33.94zM120 112h176a8 8 0 018 8v48a8 8 0 01-8 8H120a8 8 0 01-8-8v-48a8 8 0 018-8zm139.75 319.91a80 80 0 1176.16-76.16 80.06 80.06 0 01-76.16 76.16z"
+            />
+            <circle cx="256" cy="352" r="48" />
+          </svg>
+        </button>
+        <button
+          title="Close"
+          id="close-motd"
+          onclick="window.location.href='/';"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="ionicon"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="editor"></div>
+  </body>
+  <script>
+    function isDarkModeEnabled() {
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      );
+      return darkModeMediaQuery.matches;
+    }
+
+    function initializeEditor() {
+      const filePath = "{{ file_path }}";
+      const fileContents = `{{ file_contents|safe }}`;
+
+      const editor = ace.edit("editor");
+      const modelist = ace.require("ace/ext/modelist");
+      const mode = modelist.getModeForPath(filePath).mode;
+
+      editor.setTheme(
+        `ace/theme/tomorrow${isDarkModeEnabled() ? "_night" : ""}`
+      );
+      editor.getSession().setMode(mode);
+      editor.getSession().setValue(fileContents);
+      editor.setShowPrintMargin(false);
+      editor.gotoLine(editor.getSession().getLength());
+      editor.navigateLineEnd();
+
+      return editor;
+    }
+
+    function saveFile(editor) {
+      const fileContent = editor.getSession().getValue();
+      const fileName = "{{ file_path }}";
+
+      const formData = new FormData();
+      formData.append(
+        "file",
+        new Blob([fileContent], { type: "application/octet-stream" }),
+        fileName
+      );
+
+      fetch(`/api/update/${fileName}`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+        })
+        .then((result) => {
+          console.log(result);
+          alert(result.message);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+
+    window.addEventListener("load", function () {
+      const editor = initializeEditor();
+      document
+        .getElementById("editor-save-button")
+        .addEventListener("click", function () {
+          saveFile(editor);
+        });
+    });
+  </script>
+</html>

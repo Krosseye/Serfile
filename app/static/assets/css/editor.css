@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "FiraCode";
+  src: url("../fonts/FiraCode/FiraCode-Regular.woff2") format("woff2");
+}
+
+.header span:nth-child(2) {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.header span:nth-child(2) span:nth-child(2) {
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+#editor {
+  width: 100vw;
+  flex: 1;
+}
+
+.ace_editor {
+  background-color: var(--primary-color);
+}
+
+.ace_gutter-layer {
+  background-color: var(--secondary-color);
+  border-right: var(--border);
+}
+
+.ace_active-line {
+  background-color: var(--tertiary-color) !important;
+}
+
+.ace_gutter-active-line {
+  background-color: var(--tertiary-color) !important;
+}
+
+.ace_selection {
+  background-color: var(--secondary-color) !important;
+}
+
+.ace_editor {
+  font-family: "FiraCode", monospace;
+}

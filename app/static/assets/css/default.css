@@ -1,27 +1,29 @@
 :root {
   --font-family: "Inter var", Arial, sans-serif;
   --emoji-font: "NotoEmoji", sans-serif;
-  --primary-color: #f3f3f3;
+
   --shade: black;
+  --primary-color: #f3f3f3;
   --secondary-color: color-mix(in srgb, var(--primary-color), var(--shade) 10%);
   --tertiary-color: color-mix(in srgb, var(--primary-color), var(--shade) 5%);
+
   --text-color: #373737;
   --link-color: #316dca;
+
   --border-radius: 10px;
   --border: 1px solid color-mix(in srgb, var(--primary-color), var(--shade) 15%);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary-color: #373737;
     --shade: white;
+    --primary-color: #373737;
     --text-color: #f3f3f3;
   }
 }
 
 @font-face {
   font-family: "NotoEmoji";
-  src: url("../fonts/NotoColorEmoji/NotoColorEmoji.ttf") format("truetype");
   src: url("../fonts/NotoColorEmoji/NotoColorEmoji.woff2") format("woff2");
 }
 
@@ -127,15 +129,76 @@ a:hover {
 }
 
 .icon {
-  font-size: 20px;
+  font-size: 1.5rem;
   margin-right: 5px;
   font-family: var(--emoji-font);
 }
 
 .header-icon {
   font-size: inherit;
-  margin-right: 5px;
+  margin-right: 1rem;
   font-family: var(--emoji-font);
+}
+
+.header {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  position: relative;
+  width: 100%;
+  display: flex;
+  border-bottom: var(--border);
+  justify-content: space-between;
+  align-items: center;
+}
+
+#motd-banner {
+  display: none;
+}
+
+#motd-banner .header-title {
+  font-size: 1.25rem;
+}
+
+.header-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  word-break: keep-all;
+}
+
+#home-button {
+  cursor: pointer;
+}
+
+.header .buttons {
+  display: flex;
+  margin-right: 1rem;
+}
+
+.header button {
+  font-family: var(--emoji-font);
+  fill: var(--text-color);
+  margin: 0.5rem;
+  background-color: var(--tertiary-color);
+  border: var(--border);
+  border-radius: 50%;
+  color: var(--text-color);
+  padding: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  transition: all 0.2s;
+}
+
+.header button svg {
+  height: 1.5rem;
+  fill: var(--text-color);
+}
+
+.header button:hover {
+  scale: 0.9;
+  background-color: var(--secondary-color);
 }
 
 .version {
@@ -149,56 +212,26 @@ a:hover {
   box-sizing: border-box;
 }
 
-.sortable td {
-  color: var(--text-color);
-}
-
-.sortable thead th {
-  background: var(--secondary-color);
-  color: var(--text-color);
-  font-weight: bold;
-}
-
-.sortable th:last-child {
-  border-top-right-radius: 0;
-}
-
-.sortable th:first-child {
-  border-top-left-radius: 0;
-}
-
-.sortable tbody tr:nth-child(odd) {
-  background-color: var(--primary-color);
-}
-
-.sortable tbody tr:nth-child(even) {
-  background-color: var(--tertiary-color);
-}
-
-.sortable tbody tr:hover {
-  background-color: var(--secondary-color);
-}
-
 @media screen and (max-width: 1080px) {
   .container {
     width: 85%;
   }
 }
 
-#motd-banner {
-  background-color: var(--primary-color);
-  color: var(--text-color);
-  padding: 15px 0;
-  text-align: center;
-  position: relative;
-  width: 100%;
-  display: none;
-  border-bottom: var(--border);
+#motd-title {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+#motd-message {
+  font-weight: normal;
+  font-size: 1rem;
   word-break: break-all;
 }
 
-#motd-title {
-  font-weight: bold;
+#motd-content {
+  text-align: center;
+  align-items: center;
 }
 
 .close-button {
@@ -210,7 +243,7 @@ a:hover {
   cursor: pointer;
   position: absolute;
   top: 11.5px;
-  left: 10px;
+  right: 1.5rem;
   pointer-events: all;
 }
 
@@ -224,12 +257,12 @@ a:hover {
   border: var(--border);
   border-radius: var(--border-radius);
   pointer-events: none;
-  position: fixed; /* Use fixed position */
+  position: fixed;
   width: fit-content;
   height: fit-content;
-  top: 50%; /* Vertically center */
-  left: 50%; /* Horizontally center */
-  transform: translate(-50%, -50%); /* Center it perfectly */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 999;
   display: none;
   flex-direction: column;
