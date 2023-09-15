@@ -25,6 +25,7 @@ def redirect_to_main_page():
 @app.route("/edit/<path:path>")
 def edit_file(path):
     config = CONFIG
+    is_prod = helpers.get_environment(config)
     file_path = os.path.normpath(os.path.join(static_directory, path))
 
     if not os.path.exists(file_path) or not os.path.isfile(file_path):
@@ -37,7 +38,8 @@ def edit_file(path):
     return render_template('editor.html',
                            file_contents=file_contents,
                            config=config,
-                           file_path=path)
+                           file_path=path,
+                           is_prod=is_prod)
 
 # ---API Routes---
 

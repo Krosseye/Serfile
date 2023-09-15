@@ -3,8 +3,13 @@
   <head>
     <title>{{ config.title }} Editor</title>
     <link rel="icon" type="image/png" href="/assets/favicon.svg" />
+
+    {% if is_prod %}
+    <link rel="stylesheet" href="/assets/css/styles.min.css" />
+    {% else %}
     <link rel="stylesheet" href="/assets/css/default.css" />
     <link rel="stylesheet" href="/assets/css/editor.css" />
+    {% endif %}
     <script
       src="/assets/js/ace/ace.js"
       type="text/javascript"
