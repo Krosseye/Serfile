@@ -26,6 +26,11 @@ licenses = {
             "name": "Fira Code",
             "version": "6.3",
             "license": "SIL Open Font License, version 1.1"
+        },
+        {
+            "name": "Ionicons",
+            "version": "7.1.2",
+            "license": "MIT License"
         }
     ]
 }
