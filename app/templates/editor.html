@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{ config.title }} Editor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/assets/favicon.svg" />
+    <meta name="author" content="Killian W" />
+    <meta charset="UTF-8" />
+    <title>{{ config.title }}</title>
+
     {% if is_prod %}
     <link rel="stylesheet" href="/assets/css/styles.min.css" />
     {% else %}
