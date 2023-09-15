@@ -3,23 +3,12 @@
   <head>
     <title>{{ config.title }} Editor</title>
     <link rel="icon" type="image/png" href="/assets/favicon.svg" />
-
     {% if is_prod %}
     <link rel="stylesheet" href="/assets/css/styles.min.css" />
     {% else %}
     <link rel="stylesheet" href="/assets/css/default.css" />
     <link rel="stylesheet" href="/assets/css/editor.css" />
     {% endif %}
-    <script
-      src="/assets/js/ace/ace.js"
-      type="text/javascript"
-      charset="utf-8"
-    ></script>
-    <script
-      src="/assets/js/ace/ext-modelist.js"
-      type="text/javascript"
-      charset="utf-8"
-    ></script>
   </head>
   <body>
     <div class="header">
@@ -64,73 +53,83 @@
       </div>
     </div>
     <div id="editor"></div>
+    <script
+      src="/assets/js/ace/ace.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="/assets/js/ace/ext-modelist.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script>
+      function isDarkModeEnabled() {
+        const darkModeMediaQuery = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        );
+        return darkModeMediaQuery.matches;
+      }
+
+      function initializeEditor() {
+        const filePath = "{{ file_path }}";
+        const fileContents = `{{ file_contents|safe }}`;
+
+        const editor = ace.edit("editor");
+        const modelist = ace.require("ace/ext/modelist");
+        const mode = modelist.getModeForPath(filePath).mode;
+
+        editor.setTheme(
+          `ace/theme/tomorrow${isDarkModeEnabled() ? "_night" : ""}`
+        );
+        editor.getSession().setMode(mode);
+        editor.getSession().setValue(fileContents);
+        editor.setShowPrintMargin(false);
+        editor.gotoLine(editor.getSession().getLength());
+        editor.navigateLineEnd();
+
+        return editor;
+      }
+
+      function saveFile(editor) {
+        const fileContent = editor.getSession().getValue();
+        const fileName = "{{ file_path }}";
+
+        const formData = new FormData();
+        formData.append(
+          "file",
+          new Blob([fileContent], { type: "application/octet-stream" }),
+          fileName
+        );
+
+        fetch(`/api/update/${fileName}`, {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+          })
+          .then((result) => {
+            console.log(result);
+            alert(result.message);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+
+      window.addEventListener("load", function () {
+        const editor = initializeEditor();
+        document
+          .getElementById("editor-save-button")
+          .addEventListener("click", function () {
+            saveFile(editor);
+          });
+      });
+    </script>
   </body>
-  <script>
-    function isDarkModeEnabled() {
-      const darkModeMediaQuery = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      );
-      return darkModeMediaQuery.matches;
-    }
-
-    function initializeEditor() {
-      const filePath = "{{ file_path }}";
-      const fileContents = `{{ file_contents|safe }}`;
-
-      const editor = ace.edit("editor");
-      const modelist = ace.require("ace/ext/modelist");
-      const mode = modelist.getModeForPath(filePath).mode;
-
-      editor.setTheme(
-        `ace/theme/tomorrow${isDarkModeEnabled() ? "_night" : ""}`
-      );
-      editor.getSession().setMode(mode);
-      editor.getSession().setValue(fileContents);
-      editor.setShowPrintMargin(false);
-      editor.gotoLine(editor.getSession().getLength());
-      editor.navigateLineEnd();
-
-      return editor;
-    }
-
-    function saveFile(editor) {
-      const fileContent = editor.getSession().getValue();
-      const fileName = "{{ file_path }}";
-
-      const formData = new FormData();
-      formData.append(
-        "file",
-        new Blob([fileContent], { type: "application/octet-stream" }),
-        fileName
-      );
-
-      fetch(`/api/update/${fileName}`, {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-        })
-        .then((result) => {
-          console.log(result);
-          alert(result.message);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    }
-
-    window.addEventListener("load", function () {
-      const editor = initializeEditor();
-      document
-        .getElementById("editor-save-button")
-        .addEventListener("click", function () {
-          saveFile(editor);
-        });
-    });
-  </script>
 </html>

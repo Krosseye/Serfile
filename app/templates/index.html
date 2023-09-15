@@ -11,21 +11,6 @@
     {% endif %}
   </head>
   <body id="body">
-    <div id="flask-data" style="display: none">
-      <span id="flask-data-path">{{ path }}</span>
-      <span id="flask-data-title">{{ config.title }}</span>
-    </div>
-    <div class="overlay" id="upload-overlay">
-      <span class="overlay-icon">🖱️➡️📂</span>
-      <h2>Drop to upload your files</h2>
-    </div>
-    <div class="overlay" id="upload-progress-overlay">
-      <span class="overlay-icon" id="upload-progress-icon">⏳</span>
-      <h2 id="upload-progress"></h2>
-      <button class="close-button" id="close-upload-progress-overlay">
-        ❌
-      </button>
-    </div>
     <div class="header">
       <span
         title="Home"
@@ -110,12 +95,31 @@
     <footer class="version">
       <span class="icon">🚀</span>Version: {{ version }}
     </footer>
+    <div id="flask-data" style="display: none">
+      <span id="flask-data-path">{{ path }}</span>
+      <span id="flask-data-title">{{ config.title }}</span>
+    </div>
+    <div class="overlay" id="upload-overlay">
+      <span class="overlay-icon">🖱️➡️📂</span>
+      <h2>Drop to upload your files</h2>
+    </div>
+    <div class="overlay" id="upload-progress-overlay">
+      <span class="overlay-icon" id="upload-progress-icon">⏳</span>
+      <h2 id="upload-progress"></h2>
+      <button class="close-button" id="close-upload-progress-overlay">
+        ❌
+      </button>
+    </div>
+    {% if is_prod %}
+    <script src="/assets/js/scripts.min.js"></script>
+    {% else %}
+    <script src="/assets/js/motd.js" defer></script>
+    <script src="/assets/js/sortable.js" defer></script>
+    <script
+      src="/assets/js/drag-n-drop.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    {% endif %}
   </body>
-  {% if is_prod %}
-  <script src="/assets/js/scripts.min.js"></script>
-  {% else %}
-  <script src="/assets/js/motd.js" defer></script>
-  <script src="/assets/js/sortable.js" defer></script>
-  <script src="/assets/js/drag-n-drop.js'" defer></script>
-  {% endif %}
 </html>
