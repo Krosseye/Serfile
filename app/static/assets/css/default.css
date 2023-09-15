@@ -32,7 +32,6 @@
   font-weight: 100 900;
   font-display: swap;
   font-style: normal;
-  font-named-instance: "Regular";
   src: url("../fonts/Inter/Inter-roman.var.woff2?v=3.19") format("woff2");
 }
 @font-face {
@@ -40,7 +39,6 @@
   font-weight: 100 900;
   font-display: swap;
   font-style: italic;
-  font-named-instance: "Italic";
   src: url("../fonts/Inter/Inter-italic.var.woff2?v=3.19") format("woff2");
 }
 
@@ -162,8 +160,8 @@ a:hover {
 .header-title {
   font-weight: bold;
   font-size: 1.5rem;
-  padding: 0.5rem;
-  margin-left: 1rem;
+  padding: 0.725rem 0;
+  margin-left: 1.5rem;
   word-break: keep-all;
 }
 
