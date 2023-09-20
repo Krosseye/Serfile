@@ -1,18 +1,18 @@
-# :ocean: Serfile - Simple File Hosting Web Server
+# 🌊 Serfile - Simple File Hosting Web Server
 
 Serfile is a lightweight web server designed for simple file hosting and browsing. It provides a minimalist web-based user interface and API for navigating folders and accessing files.
 
 ## Features
 
-- :rocket: Easy installation and setup.
-- :file_folder: Web-based UI for browsing and managing files.
-- :pencil2: Integrated editor for editing code and text files.
-- :gear: Two deployment options: Python environment or Docker.
-- :scroll: MIT licensed - use, modify, and distribute with ease.
+- 🚀 Easy installation and setup.
+- 📁 Web-based UI for browsing and managing files.
+- ✏️ Integrated editor for editing code and text files.
+- ⚙️ Two deployment options: Python environment or Docker.
+- 📜 MIT licensed - use, modify, and distribute with ease.
 
 ## Installation and Usage
 
-### :computer: Python Environment
+### 🐍 Python Environment
 
 1. Clone the repository:
 
@@ -43,7 +43,7 @@ Serfile is a lightweight web server designed for simple file hosting and browsin
 
 6. Access the Serfile UI by opening a web browser and navigating to `http://localhost:8080` or your specified port.
 
-### :whale: Docker Compose
+### 🐳 Docker Compose
 
 1. Clone the repository:
 
@@ -63,7 +63,7 @@ Serfile is a lightweight web server designed for simple file hosting and browsin
 
 ## Configuration
 
-### :wrench: Server (`config.json`)
+### 🔧 Server (`config.json`)
 
 Modify the `config.json` file to customize settings.
 
@@ -79,7 +79,7 @@ Modify the `config.json` file to customize settings.
 
 Environment options are `prod`/`production` or `dev`/`develop`
 
-### :whale2: Docker Compose (`docker-compose.yml`)
+### 🐋 Docker Compose (`docker-compose.yml`)
 
 Edit the `docker-compose.yml` file to adjust settings.
 
@@ -104,7 +104,7 @@ services:
 
 ## Disclaimer
 
-**:construction: Please be aware that Serfile is currently in its alpha stages**
+**🚧 Please be aware that Serfile is currently in its alpha stages**
 
 - **Frequent Updates and Changes:** The Serfile project is actively under development, there will be frequent updates and changes to its codebase, features, and functionality.
 - **Incomplete Features:** Some features may not work as expected or may be incomplete. We are continuously working to improve and expand the capabilities of Serfile.
@@ -113,8 +113,8 @@ services:
 
 ## License
 
-:page_with_curl: Serfile is distributed under the MIT License. For more details, see the [LICENSE](LICENSE) file.
+📃 Serfile is distributed under the MIT License. For more details, see the [LICENSE](LICENSE) file.
 
 ---
 
-:speech_balloon: Feel free to contribute, report issues, or suggest improvements by creating a pull request or opening an issue on the [GitHub repository](https://github.com/Krosseye/Serfile). Your feedback is greatly appreciated!
+💬 Feel free to contribute, report issues, or suggest improvements by creating a pull request or opening an issue on the [GitHub repository](https://github.com/Krosseye/Serfile). Your feedback is greatly appreciated!
