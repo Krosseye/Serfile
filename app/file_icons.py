@@ -1,22 +1,22 @@
 ICON_MAP = {
     # Image Formats
-    ".jpg": "🖼️",      # JPEG image
-    ".jpeg": "🖼️",
-    ".png": "🖼️",
-    ".gif": "🖼️",
-    ".bmp": "🖼️",
-    ".svg": "🖼️",
-    ".webp": "🖼️",
-    ".ico": "🖼️",      # Icon file
-    ".tif": "🖼️",      # TIFF image
-    ".tiff": "🖼️",
-    ".jp2": "🖼️",      # JPEG 2000 image
-    ".jxr": "🖼️",      # JPEG XR image
+    ".jpg": "🖼️",       # JPEG image
+    ".jpeg": "🖼️",      # JPEG image
+    ".png": "🖼️",       # PNG image
+    ".gif": "🖼️",       # GIF image
+    ".bmp": "🖼️",       # BMP image
+    ".svg": "🖼️",       # SVG image
+    ".webp": "🖼️",      # WebP image
+    ".ico": "🖼️",       # Icon file
+    ".tif": "🖼️",       # TIFF image
+    ".tiff": "🖼️",      # TIFF image
+    ".jp2": "🖼️",       # JPEG 2000 image
+    ".jxr": "🖼️",       # JPEG XR image
 
     # Audio Formats
     ".mp3": "🎵",       # MP3 audio
-    ".wav": "🎵",
-    ".ogg": "🎵",
+    ".wav": "🎵",       # WAV audio
+    ".ogg": "🎵",       # OGG audio
     ".flac": "🎵",      # FLAC audio
     ".aac": "🎵",       # AAC audio
     ".wma": "🎵",       # WMA audio
@@ -24,8 +24,8 @@ ICON_MAP = {
 
     # Video Formats
     ".mp4": "📹",       # MP4 video
-    ".avi": "📹",
-    ".mkv": "📹",
+    ".avi": "📹",       # AVI video
+    ".mkv": "📹",       # MKV video
     ".mov": "📹",       # QuickTime video
     ".wmv": "📹",       # WMV video
     ".flv": "📹",       # Flash video
@@ -37,14 +37,14 @@ ICON_MAP = {
     ".md": "📝",        # Markdown file
     ".pdf": "📄",       # PDF document
     ".doc": "📑",       # DOC document
-    ".docx": "📑",
+    ".docx": "📑",      # DOCX document
     ".odt": "📑",       # OpenDocument Text
     ".odp": "📊",       # OpenDocument Presentation
     ".ods": "📈",       # OpenDocument Spreadsheet
     ".ppt": "📊",       # PowerPoint presentation
-    ".pptx": "📊",
+    ".pptx": "📊",      # PowerPoint presentation
     ".xls": "📈",       # Excel spreadsheet
-    ".xlsx": "📈",
+    ".xlsx": "📈",      # Excel spreadsheet
 
     # Data Formats
     ".csv": "📊",       # CSV file
@@ -52,13 +52,13 @@ ICON_MAP = {
     ".xml": "📜",       # XML file
 
     # Archive Formats
-    ".zip": "🗃️",      # Zip archive
-    ".rar": "🗃️",      # RAR archive
-    ".7z": "🗃️",       # 7-Zip archive
-    ".tar": "🗃️",      # Tarball archive
-    ".gz": "🗃️",       # Gzip archive
-    ".bz2": "🗃️",      # Bzip2 archive
-    ".xz": "🗃️",       # XZ archive
+    ".zip": "🗃️",       # Zip archive
+    ".rar": "🗃️",       # RAR archive
+    ".7z": "🗃️",        # 7-Zip archive
+    ".tar": "🗃️",       # Tarball archive
+    ".gz": "🗃️",        # Gzip archive
+    ".bz2": "🗃️",       # Bzip2 archive
+    ".xz": "🗃️",        # XZ archive
 
     # Executable Formats
     ".exe": "💿",       # Executable file
@@ -74,7 +74,7 @@ ICON_MAP = {
     ".rpm": "📦",       # RPM package
     ".dll": "💾",       # DLL file
 
-    # Programming and Script Formats
+    # Programming & Script Formats
     ".bat": "📜",       # Batch script
     ".cmd": "📜",       # Command script
     ".sh": "📜",        # Shell script
@@ -102,24 +102,24 @@ ICON_MAP = {
     # Disk Image Formats
     ".dmg": "💾",       # macOS disk image
     ".iso": "💿",       # ISO disk image
-    ".img": "💿",      # Generic disk image
-    ".vhd": "🗃️",      # Virtual Hard Disk (VHD)
-    ".vhdx": "🗃️",     # Virtual Hard Disk (VHDX)
-    ".vmdk": "🗃️",     # Virtual Machine Disk (VMDK)
+    ".img": "💿",       # Generic disk image
+    ".vhd": "🗃️",       # Virtual Hard Disk (VHD)
+    ".vhdx": "🗃️",      # Virtual Hard Disk (VHDX)
+    ".vmdk": "🗃️",      # Virtual Machine Disk (VMDK)
     ".cue": "📀",       # CUE file
 
-    # Vector and Graphic Design Formats
-    ".ai": "🖼️",       # Adobe Illustrator
-    ".eps": "🖼️",      # Encapsulated PostScript
-    ".psd": "🖼️",      # Adobe Photoshop
-    ".xcf": "🖼️",      # GIMP image
+    # Vector & Graphic Design Formats
+    ".ai": "🖼️",        # Adobe Illustrator
+    ".eps": "🖼️",       # Encapsulated PostScript
+    ".psd": "🖼️",       # Adobe Photoshop
+    ".xcf": "🖼️",       # GIMP image
 
-    # 3D and Design Formats
-    ".obj": "🏗️",      # Waveform Object 3D file
-    ".stl": "🏗️",      # Stereolithography 3D model
-    ".3ds": "🏗️",      # 3DS Max 3D model
-    ".fbx": "🏗️",      # Autodesk FBX 3D model
-    ".blend": "🏗️",    # Blender 3D model
+    # 3D & Design Formats
+    ".obj": "🏗️",       # Waveform Object 3D file
+    ".stl": "🏗️",       # Stereolithography 3D model
+    ".3ds": "🏗️",       # 3DS Max 3D model
+    ".fbx": "🏗️",       # Autodesk FBX 3D model
+    ".blend": "🏗️",     # Blender 3D model
     ".blend1": "🏗️",    # Blender 3D model
     ".c4d": "🏗️",       # Cinema 4D File Format
     ".max": "🏗️",       # 3ds Max Scene File Format
@@ -127,13 +127,13 @@ ICON_MAP = {
     # Font Formats
     ".ttf": "🔡",       # TrueType font
     ".otf": "🔡",       # OpenType font
-    ".woff": "🔡",       # WebOpenFontFormat font
-    ".woff2": "🔡",       # WebOpenFontFormat font
+    ".woff": "🔡",      # WebOpenFontFormat font
+    ".woff2": "🔡",     # WebOpenFontFormat font
 
     # Miscellaneous Formats
     ".torrent": "🔗",   # Torrent file
     ".cfg": "⚙️",       # Configuration file
-    ".config": "⚙️",       # Configuration file
+    ".config": "⚙️",    # Configuration file
     ".ini": "⚙️",       # INI configuration file
     ".url": "🔗",       # URL shortcut
     ".lnk": "🔗",       # Windows shortcut
