@@ -6,6 +6,7 @@ Serfile is a lightweight web server designed for simple file hosting and browsin
 
 - :rocket: Easy installation and setup.
 - :file_folder: Web-based UI for browsing and managing files.
+- :pencil2: Integrated editor for editing code and text files.
 - :gear: Two deployment options: Python environment or Docker.
 - :scroll: MIT licensed - use, modify, and distribute with ease.
 
@@ -97,7 +98,16 @@ services:
 
 ## Preview
 
-![Preview screenshot of the Serfile Web-UI](https://i.ibb.co/yWhR0mG/Serfile-Screenshot-01.png)
+![Preview screenshot of the Serfile Web-UI](https://i.ibb.co/CnZj4z1/01-Serfile-0-10-4.png)
+
+## Disclaimer
+
+**:construction: Please be aware that Serfile is currently in its alpha stages**
+
+- **Frequent Updates and Changes:** The Serfile project is actively under development, there will be frequent updates and changes to its codebase, features, and functionality.
+- **Incomplete Features:** Some features may not work as expected or may be incomplete. We are continuously working to improve and expand the capabilities of Serfile.
+- **Everything is Subject to Change:** Expect that everything, including APIs, configurations, and user interfaces, is subject to change as we refine and enhance the project.
+- **Not Recommended for Production:** At this stage, Serfile is not recommended for production use. It is intended primarily for testing, experimentation, and feedback purposes. Use in a production environment is discouraged.
 
 ## License
 
