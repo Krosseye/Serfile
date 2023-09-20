@@ -168,6 +168,7 @@ a:hover {
 
 #motd-banner {
   display: none;
+  background-color: var(--tertiary-color);
 }
 
 #motd-banner .header-title {
@@ -189,6 +190,7 @@ a:hover {
 .header .buttons {
   display: flex;
   margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 .header button {

@@ -3,16 +3,14 @@
   src: url("../fonts/FiraCode/FiraCode-Regular.woff2") format("woff2");
 }
 
-.header span:nth-child(2) {
-  font-weight: bold;
-  font-size: 1.25rem;
-  word-wrap: anywhere;
+#filename {
   margin: 0.5rem 1.5rem;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
-.header span:nth-child(2) span:nth-child(2) {
-  font-weight: normal;
-  font-size: 1rem;
+#filename-container {
+  background-color: var(--tertiary-color);
 }
 
 #editor {

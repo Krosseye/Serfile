@@ -16,18 +16,6 @@
   </head>
   <body>
     <header class="header" id="main-header">
-      <span
-        title="Home"
-        class="header-title"
-        id="home-button"
-        onclick="window.location.href='/';"
-        ><span
-          ><span class="header-icon">🌊</span>{{ config.title }}</span
-        ></span
-      >
-      <span title="/{{ file_path }}" id="filename"
-        >{{ file_path.split('/')[-1] }}</span
-      >
       <nav class="buttons">
         <button title="Copy Link" id="editor-copy-button" onclick="copyLink()">
           <svg
@@ -45,6 +33,7 @@
             />
           </svg>
         </button>
+
         <button
           title="Download File"
           id="editor-download-button"
@@ -59,6 +48,7 @@
             />
           </svg>
         </button>
+
         <button title="Save Changes" id="editor-save-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -71,6 +61,9 @@
             <circle cx="256" cy="352" r="48" />
           </svg>
         </button>
+      </nav>
+
+      <div class="buttons">
         <button title="Close Editor" onclick="closeEditor();">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -82,25 +75,25 @@
             />
           </svg>
         </button>
-      </nav>
+      </div>
     </header>
-    <main id="editor"></main>
-    <div id="flask-data" style="display: none">
-      <span id="flask-data-file-path"
-        >{{ url_for('files_route', path=file_path) }}</span
-      >
+
+    <div class="header" id="filename-container">
+      <div></div>
+      <span title="/{{ file_path }}" id="filename">
+        {{ file_path.split('/')[-1] }}
+      </span>
+      <div></div>
     </div>
-    <script
-      src="/file/assets/js/ace/ace.js"
-      type="text/javascript"
-      charset="utf-8"
-    ></script>
-    <script
-      src="/file/assets/js/ace/ext-modelist.js"
-      type="text/javascript"
-      charset="utf-8"
-    ></script>
-    <script src="/file/assets/js/setup-editor-ui.js" defer></script>
+
+    <main id="editor"></main>
+
+    <div id="flask-data" style="display: none">
+      <span id="flask-data-file-path">
+        {{ url_for('files_route', path=file_path) }}
+      </span>
+    </div>
+
     <script>
       let isDirty = false;
       const fileNameContainer = document.getElementById("filename");
@@ -186,5 +179,16 @@
           });
       });
     </script>
+    <script
+      src="/file/assets/js/ace/ace.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="/file/assets/js/ace/ext-modelist.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script src="/file/assets/js/setup-editor-ui.js" defer></script>
   </body>
 </html>

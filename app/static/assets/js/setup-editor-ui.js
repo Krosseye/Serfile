@@ -31,19 +31,23 @@ function copyLink() {
 
   const domain = currentURL.replace(pathname, "");
 
-  const filePath = document.getElementById("flask-data-file-path").textContent;
+  const filePath = document
+    .getElementById("flask-data-file-path")
+    .textContent.trim();
 
   const fullLink = `${domain}${filePath}`;
   copyToClipboard(fullLink);
 }
 
 function closeEditor() {
-  const filePath = document.getElementById("flask-data-file-path").textContent;
+  const filePath = document
+    .getElementById("flask-data-file-path")
+    .textContent.trim();
 
-  // Remove first 5 characters `/file`
+  // Remove the first 5 characters (`/file`)
   var directoryPath = filePath.substring(5);
 
-  // Remove file name
+  // Remove the file name
   var lastSeparatorIndex = directoryPath.lastIndexOf("/");
   if (lastSeparatorIndex !== -1) {
     directoryPath = directoryPath.substring(0, lastSeparatorIndex);
