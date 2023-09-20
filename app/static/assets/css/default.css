@@ -171,10 +171,6 @@ a:hover {
   background-color: var(--tertiary-color);
 }
 
-#motd-banner .header-title {
-  font-size: 1.25rem;
-}
-
 .header-title {
   font-weight: bold;
   font-size: 1.5rem;

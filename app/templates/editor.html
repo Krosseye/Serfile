@@ -5,7 +5,7 @@
     <link rel="icon" type="image/png" href="/file/assets/favicon.svg" />
     <meta name="author" content="Krosseye" />
     <meta charset="UTF-8" />
-    <title>{{ config.title }} - Editing {{ file_path.split('/')[-1] }}</title>
+    <title>{{ file_path.split('/')[-1] }} - Editor - {{ config.title }}</title>
 
     {% if is_prod %}
     <link rel="stylesheet" href="/file/assets/css/styles.min.css" />
@@ -64,6 +64,13 @@
       </nav>
 
       <div class="buttons">
+        <button title="Toggle Fullscreen" onclick="toggleFullscreen()">
+          <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M76.063,412.366l0,-101.184c0,-9.199 -7.468,-16.667 -16.666,-16.667c-9.199,0 -16.667,7.468 -16.667,16.667l0,141.421c0,9.205 7.462,16.667 16.667,16.667l141.421,-0c9.199,-0 16.667,-7.468 16.667,-16.667c-0,-9.198 -7.468,-16.666 -16.667,-16.666l-101.184,-0l124.754,-124.755c6.505,-6.505 6.505,-17.066 0,-23.57c-6.504,-6.505 -17.065,-6.505 -23.57,-0l-124.755,124.754Zm336.303,-336.303l-124.754,124.755c-6.505,6.505 -6.505,17.066 -0,23.57c6.504,6.505 17.065,6.505 23.57,0l124.755,-124.754l-0,101.184c-0,9.199 7.468,16.667 16.666,16.667c9.199,-0 16.667,-7.468 16.667,-16.667l-0,-141.421c-0,-9.205 -7.462,-16.667 -16.667,-16.667l-141.421,0c-9.199,0 -16.667,7.468 -16.667,16.667c0,9.198 7.468,16.666 16.667,16.666l101.184,0Z"
+            />
+          </svg>
+        </button>
         <button title="Close Editor" onclick="closeEditor();">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -79,11 +86,9 @@
     </header>
 
     <div class="header" id="filename-container">
-      <div></div>
       <span title="/{{ file_path }}" id="filename">
         {{ file_path.split('/')[-1] }}
       </span>
-      <div></div>
     </div>
 
     <main id="editor"></main>

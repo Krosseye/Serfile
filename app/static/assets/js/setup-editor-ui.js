@@ -55,3 +55,36 @@ function closeEditor() {
 
   window.location.href = `/browser${directoryPath}`;
 }
+
+function toggleFullscreen() {
+  const page = document.documentElement;
+
+  if (
+    !document.fullscreenElement &&
+    !document.mozFullScreenElement &&
+    !document.webkitFullscreenElement &&
+    !document.msFullscreenElement
+  ) {
+    // If the page is not in fullscreen, request fullscreen
+    if (page.requestFullscreen) {
+      page.requestFullscreen(); // Standard method
+    } else if (page.mozRequestFullScreen) {
+      page.mozRequestFullScreen(); // Firefox-specific method
+    } else if (page.webkitRequestFullscreen) {
+      page.webkitRequestFullscreen(); // Webkit-specific method
+    } else if (page.msRequestFullscreen) {
+      page.msRequestFullscreen(); // Microsoft-specific method
+    }
+  } else {
+    // If the page is already in fullscreen, exit fullscreen
+    if (document.exitFullscreen) {
+      document.exitFullscreen(); // Standard method
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen(); // Firefox-specific method
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen(); // Webkit-specific method
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen(); // Microsoft-specific method
+    }
+  }
+}
