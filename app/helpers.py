@@ -4,7 +4,7 @@ from datetime import datetime
 
 from app.file_icons import ICON_MAP
 from cssmin import cssmin
-from flask import abort, render_template, send_from_directory
+from flask import abort, render_template
 from jsmin import jsmin
 
 
@@ -129,4 +129,3 @@ def render_browser(path, config, directory, version):
                                is_prod=is_prod)
     else:
         abort(404)
-
