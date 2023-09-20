@@ -1,17 +1,17 @@
-# Use official Python runtime as parent image
+# ! Dockerfile
+# * Created by Krosseye
+# * Pulling from Python slim image
+
 FROM python:3.11.5-slim
 
-# Set working directory to /app
-WORKDIR /app
+LABEL maintainer="Krosseye"
 
-# Copy current directory contents into container at /app
+WORKDIR /app
 COPY . /app
 
-# Install packages from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 8080 available outside container
 EXPOSE 8080
 
-# Run app.py when container launches
+# Run run.py when container launches
 CMD ["python", "run.py"]
