@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/assets/favicon.svg" />
-    <meta name="author" content="Killian W" />
+    <meta name="author" content="Krosseye" />
     <meta charset="UTF-8" />
     <title>{{ config.title }}</title>
 
@@ -26,7 +26,8 @@
         ></span
       >
       <div class="buttons">
-        <button title="Settings" onclick="window.location.href='/edit';">
+        <!-- TODO: await implementation of settings route 
+          <button title="Settings" onclick="window.location.href='/settings';">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="ionicon"
@@ -38,7 +39,7 @@
             />
           </svg>
         </button>
-      </div>
+      --></div>
     </div>
     <div id="motd-banner" class="header">
       <span class="header-title"
@@ -70,11 +71,15 @@
         path_parts[i] }} {% else %}
         <a
           class="directory"
-          href="{{ url_for('files_route', path=folder_path) }}"
+          href="{{ url_for('browser_route', path=folder_path) }}"
           >{{ path_parts[i] }}</a
         >
         / {% endif %} {% endfor %}
       </h2>
+      <h4 id="storage-space" style="display: none">
+        <span id="storage-used" title="Used">Calculating</span> of
+        <span id="storage-total" title="Total">Calculating</span> used
+      </h4>
       <table class="sortable">
         <thead>
           <tr>
@@ -87,16 +92,25 @@
           {% for file in files %}
           <tr>
             <td data-sort="{{ file.name }}">
+              <!-- TODO: await implementation of 'actions' for files
+              <input
+                type="radio"
+                name="browser-file-select"
+                class="browser-radio"
+              />
+              -->
               <span class="icon">{{ file.icon }}</span>
               {% if file.is_dir %}
               <a
+                title="{{ file.name }}"
                 class="file-name"
-                href="{{ url_for('files_route', path=path + '/' + file.name) }}"
+                href="{{ url_for('browser_route', path=path + '/' + file.name) }}"
                 target="_self"
                 >{{ file.name }}</a
               >
               {% else %}
               <a
+                title="{{ file.name }}"
                 class="file-name"
                 href="{{ url_for('files_route', path=path + '/' + file.name) }}"
                 target="_blank"
@@ -136,6 +150,7 @@
     <script src="/assets/js/sortable.js" defer></script>
     <script src="/assets/js/editor-link.js" defer></script>
     <script src="/assets/js/truncate-name.js" defer></script>
+    <script src="/assets/js/get-storage-information.js" defer></script>
     <script
       src="/assets/js/drag-n-drop.js"
       type="text/javascript"

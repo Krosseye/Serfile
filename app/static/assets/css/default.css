@@ -57,7 +57,7 @@ body {
 
 .container {
   width: 65%;
-  margin: 50px auto;
+  margin: 2rem auto;
   padding: 20px;
   background-color: var(--primary-color);
   flex: 1;
@@ -110,6 +110,15 @@ tr:nth-child(odd) {
 th {
   background-color: var(--secondary-color);
   text-align: left;
+}
+
+.browser-radio {
+  display: none;
+}
+
+tr:hover .browser-radio,
+.browser-radio:checked {
+  display: inline;
 }
 
 tr:hover {
@@ -224,12 +233,13 @@ a:hover {
 #motd-message {
   font-weight: normal;
   font-size: 1rem;
-  word-break: break-all;
 }
 
 #motd-content {
   text-align: center;
   align-items: center;
+  word-wrap: normal;
+  margin: 0 1.5rem;
 }
 
 .close-button {

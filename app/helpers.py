@@ -25,6 +25,18 @@ def format_size(size):  # Format file size in a human-readable way
     return f"{size:.2f} {units[unit_index]}"
 
 
+def get_folder_size(folder_path):
+    total_size = 0
+
+    for dirpath, dirnames, filenames in os.walk(folder_path):
+        for filename in filenames:
+            filepath = os.path.join(dirpath, filename)
+
+            total_size += os.path.getsize(filepath)
+
+    return total_size
+
+
 def read_json_file(file_path):  # Read the configuration file
     try:
         with open(file_path, "r") as json_file:
@@ -78,7 +90,7 @@ def get_environment(config):
         return is_prod
 
 
-def render_html(path, config, directory, version):
+def render_browser(path, config, directory, version):
     if not path:
         path = config["root_directory"]
 

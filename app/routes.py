@@ -1,29 +1,42 @@
 import os
 from datetime import datetime
 
-from app import APP_VERSION, CONFIG, LICENSES, app, helpers, static_directory
-from flask import jsonify, redirect, render_template, request
+import psutil
+from app import (APP_VERSION, CONFIG, LICENSES, app, helpers,
+                 root_directory_path, static_directory)
+from flask import (jsonify, redirect, render_template, request,
+                   send_from_directory)
 
-# ---Web-UI Routes---
 
-
-@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>", defaults={"path": ""})
 @app.route("/<path:path>")
 def files_route(path):
+    directory = static_directory
+    full_path = os.path.join(directory, path)
+    directory, filename = os.path.split(full_path)
+    return send_from_directory(directory, filename)
+
+
+# ! Web-UI Routes
+
+
+@app.route("/browser/", defaults={"path": ""})
+@app.route("/browser/<path:path>")
+def browser_route(path):
     config = CONFIG
     version = APP_VERSION
     directory = static_directory
-    return helpers.render_html(path, config, directory, version)
+    return helpers.render_browser(path, config, directory, version)
 
 
-@app.route("/root/")
-@app.route("/root")
-def redirect_to_main_page():
-    return redirect("/", code=302)
+@app.route("/")
+@app.route("/browser/home/")
+def redirect_to_browser():
+    return redirect("/browser", code=302)
 
 
-@app.route("/edit/<path:path>")
-def edit_file(path):
+@app.route("/editor/<path:path>")
+def editor_route(path):
     config = CONFIG
     is_prod = helpers.get_environment(config)
     file_path = os.path.normpath(os.path.join(static_directory, path))
@@ -41,7 +54,7 @@ def edit_file(path):
                            file_path=path,
                            is_prod=is_prod)
 
-# ---API Routes---
+# ! API Routes
 
 
 @app.route('/api/version', methods=['GET'])
@@ -51,7 +64,7 @@ def get_version():
 
 @app.route('/api', methods=['GET'])
 def get_greeting():
-    return {'hello_world': "Serfile is running"}
+    return {'helloWorld': "Serfile is running"}
 
 
 @app.route('/api/licenses', methods=['GET'])
@@ -69,6 +82,25 @@ def get_motd():
     else:
         return {"status": "disabled",
                 "message": "MOTD is currently disabled. Check back later for updates."}
+
+
+@app.route('/api/storage', methods=['GET'])
+def get_space_usage():
+    folder_path = root_directory_path
+    total_size_bytes = helpers.get_folder_size(folder_path)
+
+    current_drive = psutil.disk_partitions()[0].device
+
+    total_storage_bytes = psutil.disk_usage(current_drive).total
+
+    space_used = total_size_bytes
+    space_total = total_storage_bytes - space_used
+
+    result = {
+        "spaceUsed": helpers.format_size(space_used),
+        "spaceAvailable": helpers.format_size(space_total)
+    }
+    return jsonify(result)
 
 
 @app.route("/api/list/<path:path>", methods=['GET'])
