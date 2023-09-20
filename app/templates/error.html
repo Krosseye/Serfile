@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/file/assets/favicon.svg" />
+    <meta name="author" content="Krosseye" />
+    <meta charset="UTF-8" />
+    <title>{{ config.title }} - Error</title>
+
+    {% if is_prod %}
+    <link rel="stylesheet" href="/file/assets/css/styles.min.css" />
+    {% else %}
+    <link rel="stylesheet" href="/file/assets/css/default.css" />
+    {% endif %}
+  </head>
+  <header class="header" id="main-header">
+    <span
+      title="Home"
+      class="header-title"
+      id="home-button"
+      onclick="window.location.href='/';"
+    >
+      <span>
+        <span class="header-icon">🌊</span>
+        {{ config.title }}
+      </span>
+    </span>
+    <nav class="buttons"></nav>
+  </header>
+  <body>
+    <main class="container">
+      <h1>Error {{ error_code }}</h1>
+      <p>{{ error_message }}</p>
+    </main>
+  </body>
+</html>

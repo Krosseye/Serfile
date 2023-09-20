@@ -2,20 +2,20 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/assets/favicon.svg" />
+    <link rel="icon" type="image/png" href="/file/assets/favicon.svg" />
     <meta name="author" content="Krosseye" />
     <meta charset="UTF-8" />
-    <title>{{ config.title }}</title>
+    <title>{{ config.title }} - Editing {{ file_path.split('/')[-1] }}</title>
 
     {% if is_prod %}
-    <link rel="stylesheet" href="/assets/css/styles.min.css" />
+    <link rel="stylesheet" href="/file/assets/css/styles.min.css" />
     {% else %}
-    <link rel="stylesheet" href="/assets/css/default.css" />
-    <link rel="stylesheet" href="/assets/css/editor.css" />
+    <link rel="stylesheet" href="/file/assets/css/default.css" />
+    <link rel="stylesheet" href="/file/assets/css/editor.css" />
     {% endif %}
   </head>
   <body>
-    <div class="header">
+    <header class="header" id="main-header">
       <span
         title="Home"
         class="header-title"
@@ -25,8 +25,10 @@
           ><span class="header-icon">🌊</span>{{ config.title }}</span
         ></span
       >
-      <span title="/{{ file_path }}">{{ file_path.split('/')[-1] }}</span>
-      <div class="buttons">
+      <span title="/{{ file_path }}" id="filename"
+        >{{ file_path.split('/')[-1] }}</span
+      >
+      <nav class="buttons">
         <button title="Copy Link" id="editor-copy-button" onclick="copyLink()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +71,7 @@
             <circle cx="256" cy="352" r="48" />
           </svg>
         </button>
-        <button title="Close Editor" onclick="window.history.back();">
+        <button title="Close Editor" onclick="closeEditor();">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="ionicon"
@@ -80,27 +82,29 @@
             />
           </svg>
         </button>
-      </div>
-    </div>
-    <div id="editor"></div>
+      </nav>
+    </header>
+    <main id="editor"></main>
     <div id="flask-data" style="display: none">
       <span id="flask-data-file-path"
         >{{ url_for('files_route', path=file_path) }}</span
       >
     </div>
     <script
-      src="/assets/js/ace/ace.js"
+      src="/file/assets/js/ace/ace.js"
       type="text/javascript"
       charset="utf-8"
     ></script>
     <script
-      src="/assets/js/ace/ext-modelist.js"
+      src="/file/assets/js/ace/ext-modelist.js"
       type="text/javascript"
       charset="utf-8"
     ></script>
-    <script src="/assets/js/setup-editor-ui.js" defer></script>
+    <script src="/file/assets/js/setup-editor-ui.js" defer></script>
     <script>
       let isDirty = false;
+      const fileNameContainer = document.getElementById("filename");
+      const fileNameText = fileNameContainer.textContent;
 
       function isDarkModeEnabled() {
         const darkModeMediaQuery = window.matchMedia(
@@ -128,6 +132,7 @@
 
         editor.getSession().on("change", function () {
           isDirty = true;
+          fileNameContainer.textContent = `${fileNameText} •`;
         });
 
         return editor;
@@ -151,6 +156,7 @@
           .then((response) => {
             if (response.ok) {
               isDirty = false;
+              fileNameContainer.textContent = `${fileNameText}`;
               return response.json();
             } else {
               throw new Error(`HTTP error! Status: ${response.status}`);

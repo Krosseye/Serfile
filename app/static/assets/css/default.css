@@ -34,6 +34,7 @@
   font-style: normal;
   src: url("../fonts/Inter/Inter-roman.var.woff2?v=3.19") format("woff2");
 }
+
 @font-face {
   font-family: "Inter var";
   font-weight: 100 900;
@@ -156,6 +157,13 @@ a:hover {
   border-bottom: var(--border);
   justify-content: space-between;
   align-items: center;
+}
+
+#main-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 }
 
 #motd-banner {

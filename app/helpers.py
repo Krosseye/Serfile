@@ -4,7 +4,7 @@ from datetime import datetime
 
 from app.file_icons import ICON_MAP
 from cssmin import cssmin
-from flask import render_template, send_from_directory
+from flask import abort, render_template, send_from_directory
 from jsmin import jsmin
 
 
@@ -127,8 +127,6 @@ def render_browser(path, config, directory, version):
                                config=config,
                                version=version,
                                is_prod=is_prod)
-    elif os.path.isfile(full_path):
-        directory, filename = os.path.split(full_path)
-        return send_from_directory(directory, filename)
     else:
-        return "Not Found", 404
+        abort(404)
+

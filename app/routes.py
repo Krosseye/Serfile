@@ -4,17 +4,34 @@ from datetime import datetime
 import psutil
 from app import (APP_VERSION, CONFIG, LICENSES, app, helpers,
                  root_directory_path, static_directory)
-from flask import (jsonify, redirect, render_template, request,
+from flask import (abort, jsonify, redirect, render_template, request,
                    send_from_directory)
 
+# ! Files Route
 
-@app.route("/<path:path>", defaults={"path": ""})
-@app.route("/<path:path>")
+
+@app.route("/file/<path:path>", defaults={"path": ""})
+@app.route("/file/<path:path>")
 def files_route(path):
     directory = static_directory
     full_path = os.path.join(directory, path)
     directory, filename = os.path.split(full_path)
     return send_from_directory(directory, filename)
+
+
+# ! Error Handling Routes
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    config = CONFIG
+    return render_template('error.html', error_code=404, error_message="The page you are looking for does not exist.", config=config), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    config = CONFIG
+    return render_template('error.html', error_code=500, error_message="Something went wrong on our end. Please try again later.", config=config), 500
 
 
 # ! Web-UI Routes
@@ -42,7 +59,7 @@ def editor_route(path):
     file_path = os.path.normpath(os.path.join(static_directory, path))
 
     if not os.path.exists(file_path) or not os.path.isfile(file_path):
-        return "File not found", 404
+        abort(404)
 
     with open(file_path, 'r', encoding='utf-8') as file:
         file_contents = file.read()
@@ -131,7 +148,7 @@ def list_files_json(path):
             })
         return {"files": file_data}
     else:
-        return "Not Found", 404
+        abort(404)
 
 
 @app.route("/api/update/<path:path>", methods=["POST"])
@@ -141,7 +158,7 @@ def update_file(path):
     file_path = os.path.normpath(os.path.join(static_directory, path))
 
     if not os.path.exists(file_path) or not os.path.isfile(file_path):
-        return jsonify({"message": "File not found"}), 404
+        abort(404)
 
     data.save(file_path)
 
@@ -184,5 +201,5 @@ def upload_file(directory='', subdirectory=''):
         else:
             return jsonify({'message': 'File uploaded successfully'}), 201
 
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    except Exception:
+        abort(500)

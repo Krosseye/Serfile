@@ -36,3 +36,18 @@ function copyLink() {
   const fullLink = `${domain}${filePath}`;
   copyToClipboard(fullLink);
 }
+
+function closeEditor() {
+  const filePath = document.getElementById("flask-data-file-path").textContent;
+
+  // Remove first 5 characters `/file`
+  var directoryPath = filePath.substring(5);
+
+  // Remove file name
+  var lastSeparatorIndex = directoryPath.lastIndexOf("/");
+  if (lastSeparatorIndex !== -1) {
+    directoryPath = directoryPath.substring(0, lastSeparatorIndex);
+  }
+
+  window.location.href = `/browser${directoryPath}`;
+}

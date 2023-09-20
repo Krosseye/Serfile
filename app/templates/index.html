@@ -2,30 +2,32 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/assets/favicon.svg" />
+    <link rel="icon" type="image/png" href="/file/assets/favicon.svg" />
     <meta name="author" content="Krosseye" />
     <meta charset="UTF-8" />
     <title>{{ config.title }}</title>
 
     {% if is_prod %}
-    <link rel="stylesheet" href="/assets/css/styles.min.css" />
+    <link rel="stylesheet" href="/file/assets/css/styles.min.css" />
     {% else %}
-    <link rel="stylesheet" href="/assets/css/default.css" />
-    <link rel="stylesheet" href="/assets/css/sortable.css" />
+    <link rel="stylesheet" href="/file/assets/css/default.css" />
+    <link rel="stylesheet" href="/file/assets/css/sortable.css" />
     {% endif %}
   </head>
   <body id="body">
-    <div class="header">
+    <header class="header" id="main-header">
       <span
         title="Home"
         class="header-title"
         id="home-button"
         onclick="window.location.href='/';"
-        ><span
-          ><span class="header-icon">🌊</span>{{ config.title }}</span
-        ></span
       >
-      <div class="buttons">
+        <span>
+          <span class="header-icon">🌊</span>
+          {{ config.title }}
+        </span>
+      </span>
+      <nav class="buttons">
         <!-- TODO: await implementation of settings route 
           <button title="Settings" onclick="window.location.href='/settings';">
           <svg
@@ -39,8 +41,8 @@
             />
           </svg>
         </button>
-      --></div>
-    </div>
+      --></nav>
+    </header>
     <div id="motd-banner" class="header">
       <span class="header-title"
         ><span><span class="header-icon">📢</span>MOTD</span></span
@@ -63,7 +65,7 @@
         </button>
       </div>
     </div>
-    <div class="container" id="drop-area">
+    <main class="container" id="drop-area">
       <h2>
         / {% set path_parts = path.split('/') %} {% for i in
         range(path_parts|length) %} {% set folder_path =
@@ -93,12 +95,12 @@
           <tr>
             <td data-sort="{{ file.name }}">
               <!-- TODO: await implementation of 'actions' for files
-              <input
-                type="radio"
-                name="browser-file-select"
-                class="browser-radio"
-              />
-              -->
+                <input
+                  type="radio"
+                  name="browser-file-select"
+                  class="browser-radio"
+                />
+                -->
               <span class="icon">{{ file.icon }}</span>
               {% if file.is_dir %}
               <a
@@ -124,7 +126,7 @@
           {% endfor %}
         </tbody>
       </table>
-    </div>
+    </main>
     <footer class="version">
       <span class="icon">🚀</span>Version: {{ version }}
     </footer>
@@ -144,15 +146,15 @@
       </button>
     </div>
     {% if is_prod %}
-    <script src="/assets/js/scripts.min.js"></script>
+    <script src="/file/assets/js/scripts.min.js"></script>
     {% else %}
-    <script src="/assets/js/motd.js" defer></script>
-    <script src="/assets/js/sortable.js" defer></script>
-    <script src="/assets/js/editor-link.js" defer></script>
-    <script src="/assets/js/truncate-name.js" defer></script>
-    <script src="/assets/js/get-storage-information.js" defer></script>
+    <script src="/file/assets/js/motd.js" defer></script>
+    <script src="/file/assets/js/sortable.js" defer></script>
+    <script src="/file/assets/js/editor-link.js" defer></script>
+    <script src="/file/assets/js/truncate-name.js" defer></script>
+    <script src="/file/assets/js/get-storage-information.js" defer></script>
     <script
-      src="/assets/js/drag-n-drop.js"
+      src="/file/assets/js/drag-n-drop.js"
       type="text/javascript"
       charset="utf-8"
     ></script>
