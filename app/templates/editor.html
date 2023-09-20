@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/assets/favicon.svg" />
-    <meta name="author" content="Killian W" />
+    <meta name="author" content="Krosseye" />
     <meta charset="UTF-8" />
     <title>{{ config.title }}</title>
 
@@ -25,9 +25,39 @@
           ><span class="header-icon">🌊</span>{{ config.title }}</span
         ></span
       >
-      <span>{{ file_path }}</span>
+      <span title="/{{ file_path }}">{{ file_path.split('/')[-1] }}</span>
       <div class="buttons">
-        <button title="Save" id="editor-save-button">
+        <button title="Copy Link" id="editor-copy-button" onclick="copyLink()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="ionicon"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M200.66 352H144a96 96 0 010-192h55.41M312.59 160H368a96 96 0 010 192h-56.66M169.07 256h175.86"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="48"
+            />
+          </svg>
+        </button>
+        <button
+          title="Download File"
+          id="editor-download-button"
+          onclick="downloadFile()"
+        >
+          <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M413,422l-314,0l0,-60c0,-13.246 -10.754,-24 -24,-24c-13.246,0 -24,10.754 -24,24l0,84c0,12.764 9.985,23.214 22.563,23.957l0.05,0.003c-0,0 0.025,0.002 0.025,0.002c0.451,0.025 0.905,0.038 1.362,0.038l362,0c0.457,0 0.911,-0.013 1.362,-0.038l0.025,-0.002c0,0 0.05,-0.003 0.05,-0.003c12.578,-0.743 22.563,-11.193 22.563,-23.957l-0,-84c-0,-13.246 -10.754,-24 -24,-24c-13.246,0 -24,10.754 -24,24l-0,60Z"
+            />
+            <path
+              d="M235.077,284.487l-89.821,-89.82c-8.165,-8.166 -21.424,-8.166 -29.589,-0c-8.166,8.165 -8.166,21.424 -0,29.589l125.538,125.539c8.171,8.171 21.419,8.171 29.59,-0l125.538,-125.539c8.166,-8.165 8.166,-21.424 0,-29.589c-8.165,-8.166 -21.424,-8.166 -29.589,-0l-89.821,89.82l0,-221.487c0,-11.548 -9.375,-20.923 -20.923,-20.923c-11.548,-0 -20.923,9.375 -20.923,20.923l-0,221.487Z"
+            />
+          </svg>
+        </button>
+        <button title="Save Changes" id="editor-save-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="ionicon"
@@ -39,7 +69,7 @@
             <circle cx="256" cy="352" r="48" />
           </svg>
         </button>
-        <button title="Close" onclick="window.history.back();">
+        <button title="Close Editor" onclick="window.history.back();">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="ionicon"
@@ -53,6 +83,11 @@
       </div>
     </div>
     <div id="editor"></div>
+    <div id="flask-data" style="display: none">
+      <span id="flask-data-file-path"
+        >{{ url_for('files_route', path=file_path) }}</span
+      >
+    </div>
     <script
       src="/assets/js/ace/ace.js"
       type="text/javascript"
@@ -63,7 +98,10 @@
       type="text/javascript"
       charset="utf-8"
     ></script>
+    <script src="/assets/js/setup-editor-ui.js" defer></script>
     <script>
+      let isDirty = false;
+
       function isDarkModeEnabled() {
         const darkModeMediaQuery = window.matchMedia(
           "(prefers-color-scheme: dark)"
@@ -88,6 +126,10 @@
         editor.gotoLine(editor.getSession().getLength());
         editor.navigateLineEnd();
 
+        editor.getSession().on("change", function () {
+          isDirty = true;
+        });
+
         return editor;
       }
 
@@ -108,19 +150,26 @@
         })
           .then((response) => {
             if (response.ok) {
+              isDirty = false;
               return response.json();
             } else {
               throw new Error(`HTTP error! Status: ${response.status}`);
             }
           })
           .then((result) => {
-            console.log(result);
             alert(result.message);
           })
           .catch((error) => {
             console.error("Error:", error);
           });
       }
+
+      window.addEventListener("beforeunload", function (e) {
+        if (isDirty) {
+          e.preventDefault();
+          e.returnValue = ""; // Display a confirmation prompt
+        }
+      });
 
       window.addEventListener("load", function () {
         const editor = initializeEditor();

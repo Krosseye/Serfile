@@ -7,7 +7,7 @@ function updateAnchorHref(className, supportedFileTypes) {
     const fileExtension = fileName.split(".").pop().toLowerCase();
 
     if (supportedFileTypes.includes(fileExtension)) {
-      element.href = `/edit/${path}/${fileName}`;
+      element.href = `/editor/${path}/${fileName}`;
       element.target = "_self";
     }
   }

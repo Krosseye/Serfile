@@ -6,6 +6,8 @@
 .header span:nth-child(2) {
   font-weight: bold;
   font-size: 1.25rem;
+  word-wrap: anywhere;
+  margin: 0.5rem 1.5rem;
 }
 
 .header span:nth-child(2) span:nth-child(2) {
