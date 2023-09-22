@@ -9,8 +9,21 @@ from jsmin import jsmin
 
 
 def get_file_icon(filename, is_dir=False):   # Get icon for a file or folder
+    def is_public_dir():
+        if filename == 'Public':
+            return True
+
+    def is_private_dir():
+        if filename == 'Private':
+            return True
+
     if is_dir:
-        return "📁"
+        if is_public_dir():
+            return "🌐"
+        elif is_private_dir():
+            return "🔒"
+        else:
+            return "📁"
 
     extension = os.path.splitext(filename)[1].lower()
     return ICON_MAP.get(extension, "📄")
