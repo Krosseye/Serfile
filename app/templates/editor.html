@@ -1,3 +1,5 @@
+{% import 'macros/fluent_icons.html' as icons%}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,20 +20,7 @@
     <header class="header" id="main-header">
       <nav class="buttons">
         <button title="Copy Link" id="editor-copy-button" onclick="copyLink()">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="ionicon"
-            viewBox="0 0 512 512"
-          >
-            <path
-              d="M200.66 352H144a96 96 0 010-192h55.41M312.59 160H368a96 96 0 010 192h-56.66M169.07 256h175.86"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="48"
-            />
-          </svg>
+          {{ icons.link() }}
         </button>
 
         <button
@@ -39,48 +28,20 @@
           id="editor-download-button"
           onclick="downloadFile()"
         >
-          <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M413,422l-314,0l0,-60c0,-13.246 -10.754,-24 -24,-24c-13.246,0 -24,10.754 -24,24l0,84c0,12.764 9.985,23.214 22.563,23.957l0.05,0.003c-0,0 0.025,0.002 0.025,0.002c0.451,0.025 0.905,0.038 1.362,0.038l362,0c0.457,0 0.911,-0.013 1.362,-0.038l0.025,-0.002c0,0 0.05,-0.003 0.05,-0.003c12.578,-0.743 22.563,-11.193 22.563,-23.957l-0,-84c-0,-13.246 -10.754,-24 -24,-24c-13.246,0 -24,10.754 -24,24l-0,60Z"
-            />
-            <path
-              d="M235.077,284.487l-89.821,-89.82c-8.165,-8.166 -21.424,-8.166 -29.589,-0c-8.166,8.165 -8.166,21.424 -0,29.589l125.538,125.539c8.171,8.171 21.419,8.171 29.59,-0l125.538,-125.539c8.166,-8.165 8.166,-21.424 0,-29.589c-8.165,-8.166 -21.424,-8.166 -29.589,-0l-89.821,89.82l0,-221.487c0,-11.548 -9.375,-20.923 -20.923,-20.923c-11.548,-0 -20.923,9.375 -20.923,20.923l-0,221.487Z"
-            />
-          </svg>
+          {{ icons.arrow_download() }}
         </button>
 
         <button title="Save Changes" id="editor-save-button">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="ionicon"
-            viewBox="0 0 512 512"
-          >
-            <path
-              d="M465.94 119.76l-73.7-73.7A47.68 47.68 0 00358.3 32H96a64 64 0 00-64 64v320a64 64 0 0064 64h320a64 64 0 0064-64V153.7a47.68 47.68 0 00-14.06-33.94zM120 112h176a8 8 0 018 8v48a8 8 0 01-8 8H120a8 8 0 01-8-8v-48a8 8 0 018-8zm139.75 319.91a80 80 0 1176.16-76.16 80.06 80.06 0 01-76.16 76.16z"
-            />
-            <circle cx="256" cy="352" r="48" />
-          </svg>
+          {{ icons.save() }}
         </button>
       </nav>
 
       <div class="buttons">
         <button title="Toggle Fullscreen" onclick="toggleFullscreen()">
-          <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M76.063,412.366l0,-101.184c0,-9.199 -7.468,-16.667 -16.666,-16.667c-9.199,0 -16.667,7.468 -16.667,16.667l0,141.421c0,9.205 7.462,16.667 16.667,16.667l141.421,-0c9.199,-0 16.667,-7.468 16.667,-16.667c-0,-9.198 -7.468,-16.666 -16.667,-16.666l-101.184,-0l124.754,-124.755c6.505,-6.505 6.505,-17.066 0,-23.57c-6.504,-6.505 -17.065,-6.505 -23.57,-0l-124.755,124.754Zm336.303,-336.303l-124.754,124.755c-6.505,6.505 -6.505,17.066 -0,23.57c6.504,6.505 17.065,6.505 23.57,0l124.755,-124.754l-0,101.184c-0,9.199 7.468,16.667 16.666,16.667c9.199,-0 16.667,-7.468 16.667,-16.667l-0,-141.421c-0,-9.205 -7.462,-16.667 -16.667,-16.667l-141.421,0c-9.199,0 -16.667,7.468 -16.667,16.667c0,9.198 7.468,16.666 16.667,16.666l101.184,0Z"
-            />
-          </svg>
+          {{ icons.arrow_maximize() }}
         </button>
         <button title="Close Editor" onclick="closeEditor();">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="ionicon"
-            viewBox="0 0 512 512"
-          >
-            <path
-              d="M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z"
-            />
-          </svg>
+          {{ icons.dismiss() }}
         </button>
       </div>
     </header>
@@ -93,97 +54,27 @@
 
     <main id="editor"></main>
 
-    <div id="flask-data" style="display: none">
-      <span id="flask-data-file-path">
-        {{ url_for('files_route', path=file_path) }}
-      </span>
+    <div class="overlay" id="clipboard-overlay">
+      <span class="overlay-icon">🔗➡️📋</span>
+      <h2>Link copied to clipboard</h2>
     </div>
 
-    <script>
-      let isDirty = false;
-      const fileNameContainer = document.getElementById("filename");
-      const fileNameText = fileNameContainer.textContent;
+    <div class="overlay" id="download-overlay">
+      <span class="overlay-icon">🌐➡️📂</span>
+      <h2>Donwloading {{ file_path.split('/')[-1] }}</h2>
+    </div>
 
-      function isDarkModeEnabled() {
-        const darkModeMediaQuery = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        );
-        return darkModeMediaQuery.matches;
-      }
+    <div class="overlay" id="update-overlay">
+      <span class="overlay-icon">📄➡️🌐</span>
+      <h2>Changes saved successfully</h2>
+    </div>
 
-      function initializeEditor() {
-        const filePath = "{{ file_path }}";
-        const fileContents = `{{ file_contents|safe }}`;
+    <div id="flask-data" style="display: none">
+      <span id="flask-data-title">{{ config.title }}</span>
+      <span id="flask-data-file-path"> {{ file_path }} </span>
+      <span id="flask-data-file-contents">{{ file_contents|safe }}</span>
+    </div>
 
-        const editor = ace.edit("editor");
-        const modelist = ace.require("ace/ext/modelist");
-        const mode = modelist.getModeForPath(filePath).mode;
-
-        editor.setTheme(
-          `ace/theme/tomorrow${isDarkModeEnabled() ? "_night" : ""}`
-        );
-        editor.getSession().setMode(mode);
-        editor.getSession().setValue(fileContents);
-        editor.setShowPrintMargin(false);
-        editor.gotoLine(editor.getSession().getLength());
-        editor.navigateLineEnd();
-
-        editor.getSession().on("change", function () {
-          isDirty = true;
-          fileNameContainer.textContent = `${fileNameText} •`;
-        });
-
-        return editor;
-      }
-
-      function saveFile(editor) {
-        const fileContent = editor.getSession().getValue();
-        const fileName = "{{ file_path }}";
-
-        const formData = new FormData();
-        formData.append(
-          "file",
-          new Blob([fileContent], { type: "application/octet-stream" }),
-          fileName
-        );
-
-        fetch(`/api/update/${fileName}`, {
-          method: "POST",
-          body: formData,
-        })
-          .then((response) => {
-            if (response.ok) {
-              isDirty = false;
-              fileNameContainer.textContent = `${fileNameText}`;
-              return response.json();
-            } else {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-          })
-          .then((result) => {
-            alert(result.message);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      }
-
-      window.addEventListener("beforeunload", function (e) {
-        if (isDirty) {
-          e.preventDefault();
-          e.returnValue = ""; // Display a confirmation prompt
-        }
-      });
-
-      window.addEventListener("load", function () {
-        const editor = initializeEditor();
-        document
-          .getElementById("editor-save-button")
-          .addEventListener("click", function () {
-            saveFile(editor);
-          });
-      });
-    </script>
     <script
       src="/file/assets/js/ace/ace.js"
       type="text/javascript"
@@ -194,6 +85,6 @@
       type="text/javascript"
       charset="utf-8"
     ></script>
-    <script src="/file/assets/js/setup-editor-ui.js" defer></script>
+    <script src="/file/assets/js/setup-editor.js" defer></script>
   </body>
 </html>

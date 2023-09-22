@@ -209,6 +209,10 @@ a:hover {
   fill: var(--text-color);
 }
 
+svg path {
+  fill: var(--text-color);
+}
+
 .header button:hover {
   scale: 0.9;
   background-color: var(--secondary-color);

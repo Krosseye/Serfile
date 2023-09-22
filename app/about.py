@@ -1,4 +1,4 @@
-app_version = "0.11.3 (Alpha Pre-release)"
+app_version = "0.11.4 (Alpha Pre-release)"
 
 licenses = {
     "assets": [
@@ -28,8 +28,8 @@ licenses = {
             "license": "SIL Open Font License, version 1.1"
         },
         {
-            "name": "Ionicons",
-            "version": "7.1.2",
+            "name": "Fluent UI System Icons",
+            "version": "1.1.217",
             "license": "MIT License"
         }
     ]
