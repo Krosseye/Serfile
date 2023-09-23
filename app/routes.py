@@ -103,19 +103,14 @@ def get_motd():
 
 @app.route('/api/storage', methods=['GET'])
 def get_space_usage():
-    folder_path = root_directory_path
-    total_size_bytes = helpers.get_folder_size(folder_path)
-
     current_drive = psutil.disk_partitions()[0].device
 
+    used_storage_bytes = psutil.disk_usage(current_drive).used
     total_storage_bytes = psutil.disk_usage(current_drive).total
 
-    space_used = total_size_bytes
-    space_total = total_storage_bytes - space_used
-
     result = {
-        "spaceUsed": helpers.format_size(space_used),
-        "spaceAvailable": helpers.format_size(space_total)
+        "spaceUsed": helpers.format_size(used_storage_bytes),
+        "spaceTotal": helpers.format_size(total_storage_bytes)
     }
     return jsonify(result)
 
