@@ -23,16 +23,21 @@ function setupEditor() {
   const modelist = ace.require("ace/ext/modelist");
   const mode = modelist.getModeForPath(filePath).mode;
 
+  editor.setOptions({
+    enableBasicAutocompletion: true,
+    enableLiveAutocompletion: true,
+    showPrintMargin: false,
+  });
+
   editor.setTheme(`ace/theme/tomorrow${checkDarkMode() ? "_night" : ""}`);
   editor.getSession().setMode(mode);
   editor.getSession().setValue(fileContents);
-  editor.setShowPrintMargin(false);
   editor.gotoLine(editor.getSession().getLength());
   editor.navigateLineEnd();
 
   editor.getSession().on("change", function () {
     hasUnsavedChanges = true;
-    fileNameElement.textContent = `${fileName} •`;
+    fileNameElement.textContent = `${fileName} • Modified`;
     fileNameElement.setAttribute("title", `/${filePath} • Modified`);
   });
 
