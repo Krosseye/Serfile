@@ -3,8 +3,7 @@ function updateStorageInfo() {
     .then((response) => response.json())
     .then((data) => {
       document.getElementById("storage-used").textContent = data.spaceUsed;
-      document.getElementById("storage-total").textContent =
-        data.spaceAvailable;
+      document.getElementById("storage-total").textContent = data.spaceTotal;
       document.getElementById("storage-space").style.display = "block";
     })
     .catch((error) => {
