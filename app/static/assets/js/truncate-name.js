@@ -15,6 +15,8 @@ function truncateText(className, screenWidth) {
     if (text.length > characterLimit) {
       const truncatedText = text.slice(0, characterLimit) + "...";
       element.textContent = truncatedText;
+    } else {
+      element.textContent = text; // Set to the original title text
     }
   });
 }
