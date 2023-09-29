@@ -12,6 +12,7 @@
 
   --border-radius: 10px;
   --border: 1px solid color-mix(in srgb, var(--primary-color), var(--shade) 15%);
+  --box-shadow: 0.2rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -74,6 +75,7 @@ h1 {
 table {
   border-collapse: collapse;
   width: 100%;
+  table-layout: fixed;
 }
 
 th,
@@ -88,6 +90,7 @@ th {
 
 th:first-child {
   border-left: var(--border);
+  width: 50%;
 }
 
 th:last-child {
@@ -95,7 +98,6 @@ th:last-child {
 }
 
 td:first-child {
-  width: 75%;
   word-break: break-all;
   border-left: var(--border);
 }
@@ -229,9 +231,13 @@ svg path {
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 960px) {
   .container {
     width: 85%;
+  }
+
+  th:first-child {
+    width: 33%;
   }
 }
 
@@ -271,7 +277,7 @@ svg path {
 }
 
 .overlay {
-  background-color: var(--primary-color);
+  background-color: var(--tertiary-color);
   border: var(--border);
   border-radius: var(--border-radius);
   pointer-events: none;
@@ -288,6 +294,7 @@ svg path {
   align-items: center;
   text-align: center;
   padding: 4rem;
+  box-shadow: var(--box-shadow);
 }
 
 .overlay-icon {

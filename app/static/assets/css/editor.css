@@ -43,18 +43,13 @@
   font-family: "FiraCode", monospace;
 }
 
+.ace_dark.ace_editor.ace_autocomplete,
 .ace_editor.ace_autocomplete {
   border: var(--border);
   background: var(--secondary-color);
   color: var(--text-color);
   border-radius: var(--border-radius);
-}
-
-.ace_dark.ace_editor.ace_autocomplete {
-  border: var(--border);
-  background: var(--secondary-color);
-  color: var(--text-color);
-  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 .ace_selected {
