@@ -72,7 +72,7 @@ Modify the `config.json` file to customize settings.
   "port": 8080,
   "host": "0.0.0.0",
   "title": "Serfile",
-  "root_directory": "home",
+  "rootName": "home",
   "environment": "prod"
 }
 ```
@@ -104,7 +104,7 @@ services:
 
 ## Disclaimer
 
-**🚧 Please be aware that Serfile is currently in its alpha stages**
+### 🚧 Please be aware that Serfile is currently in its alpha stages
 
 - **Frequent Updates and Changes:** The Serfile project is actively under development, there will be frequent updates and changes to its codebase, features, and functionality.
 - **Incomplete Features:** Some features may not work as expected or may be incomplete. We are continuously working to improve and expand the capabilities of Serfile.
