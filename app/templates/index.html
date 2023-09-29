@@ -27,9 +27,11 @@
         <span> <span class="header-icon">🌊</span>{{ config.title }} </span>
       </span>
       <nav class="buttons">
-        <button title="Settings" onclick="window.location.href='/settings';">
+        <!-- TODO: Await implementation of settings route
+          <button title="Settings" onclick="window.location.href='/settings';">
           {{ icons.settings() }}
         </button>
+        -->
       </nav>
     </header>
     <div id="motd-banner" class="header">
@@ -106,10 +108,6 @@
     <footer class="version">
       <span class="icon">🚀</span>Version: {{ version }}
     </footer>
-    <div id="flask-data" style="display: none">
-      <span id="flask-data-path">{{ path }}</span>
-      <span id="flask-data-title">{{ config.title }}</span>
-    </div>
     <div class="overlay" id="upload-overlay">
       <span class="overlay-icon">🖱️➡️📂</span>
       <h2>Drop to upload your files</h2>
@@ -120,6 +118,10 @@
       <button class="close-button" id="close-upload-progress-overlay">
         ❌
       </button>
+    </div>
+    <div id="flask-data" style="display: none">
+      <span id="flask-data-path">{{ path }}</span>
+      <span id="flask-data-title">{{ config.title }}</span>
     </div>
     {% if is_prod %}
     <script src="/file/assets/js/scripts.min.js"></script>
